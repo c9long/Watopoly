@@ -10,11 +10,14 @@ protected:
     bool inJail;
     int numJailRolls;
     int locID;
-    Square* location;
+    Square *location;
     void roll();
     void next();
     void trade(string name);
+
 public:
-    void changeBalance(int x);
+    void changeBalance(int x); // cannot make properties friends for error checking
+    void trade(Player& other);
+    friend class Board;
 };
 #endif

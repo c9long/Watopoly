@@ -1,6 +1,7 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 #include "player.h"
+#include <iostream>
 
 class Square
 {

@@ -25,6 +25,6 @@ public:
     virtual void payTuition(Player &paying, Player &earning) = 0;
     virtual void addImprovement() = 0;
     void payOut(Player &){};
-    virtual ~Property() {}
+    virtual ~Property() {owner = nullptr;}
 };
 #endif

@@ -59,5 +59,9 @@ void Brown::purchase(Player &buyer)
 }
 
 void Brown::auction(){
-    
+
+}
+
+Brown::~Brown() {
+    impTuit.clear();
 }

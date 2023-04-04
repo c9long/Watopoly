@@ -18,7 +18,7 @@ public:
     void payTuition(Player &paying, Player &earning);
     void addImprovement();
     void auction();
-    void purchase();
+    void purchase(Player &buyer);
 };
 
 #endif

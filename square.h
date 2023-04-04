@@ -9,6 +9,7 @@ public:
     virtual void payTuition(Player &paying, Player &earning) = 0;
     virtual void addImprovement() = 0;
     virtual void payOut(Player&) = 0;
+    virtual int getNumImps() = 0;
     virtual ~Square(){}
 };
 #endif

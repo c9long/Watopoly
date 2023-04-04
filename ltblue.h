@@ -18,6 +18,7 @@ public:
     void payTuition(Player &paying, Player &earning);
     void addImprovement();
     void auction();
+    int getNumImps();
     void purchase(Player &buyer);
     ~LtBlue();
 };

@@ -19,7 +19,6 @@ class Player {
     int locId;
     Square* location;
     std::map<std::string, Square*> propertyMap; // Maps string and property name
-    std::map<Square*, Player*>& owners; // reference to owners map from board.h
     void setPropertyMap();
     void roll(); // returns total roll num
     void next();

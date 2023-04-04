@@ -19,6 +19,8 @@ public:
     void addImprovement();
     void auction();
     void purchase(Player& buyer);
+    int getNumImps();
+    
 };
 
 #endif

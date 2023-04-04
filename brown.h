@@ -21,6 +21,7 @@ public:
     void purchase(Player& buyer);
     int getNumImps();
     
+    ~Brown();
 };
 
 #endif

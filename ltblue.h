@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 using namespace std;
-class LtBlue
+class LtBlue : public Property
 {
     int price;
     string name;
@@ -18,8 +18,9 @@ public:
     void payTuition(Player &paying, Player &earning);
     void addImprovement();
     void auction();
-    void purchase();
     int getNumImps();
+    void purchase(Player &buyer);
+    ~LtBlue();
 };
 
 #endif

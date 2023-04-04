@@ -4,12 +4,12 @@
 #include <string>
 #include <vector>
 using namespace std;
-class Blue
+class Blue : public Property
 {
     int price;
     string name;
     Monopoly monopoly = Monopoly::blue;
-    int impCost = 50;
+    int impCost = 200;
     int numImps = 0;
     vector<int> impTuit;
 
@@ -18,8 +18,9 @@ public:
     void payTuition(Player &paying, Player &earning);
     void addImprovement();
     void auction();
-    void purchase();
     int getNumImps();
+    void purchase(Player &buyer);
+    ~Blue();
 };
 
 #endif

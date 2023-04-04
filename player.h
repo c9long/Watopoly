@@ -1,23 +1,38 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <string>
+#include <map>
+
+#include "square.h"
+#include "property.h"
+
 class Square;
-class Player
-{
-protected:
+class Player {
+   protected:
+    std::string name;
     int balance;
     char piece;
+    int rollSum; // the sum of two dice rolls
     bool inJail;
     int numJailRolls;
-    int locID;
-    Square *location;
-    void roll();
+    int locId;
+    Square* location;
+    std::map<std::string, Square*> propertyMap; // Maps string and property name
+    std::map<Square*, Player*>& owners; // reference to owners map from board.h
+    void setPropertyMap();
+    void roll(); // returns total roll num
     void next();
-    void trade(string name);
+    bool hasImprovements(std::string propertyName);
+    bool owns(Square* square, Player& player); // Checks if the player owns given square
+    
+    // bool trade(std::string name, std::string give, std::string receive);
 
-public:
-    void changeBalance(int x); // cannot make properties friends for error checking
-    void trade(Player& other);
+   public:
+    Player(std::string name, int balance, char piece, bool inJail, int numJailRolls, int locId, Square* location);
+    void changeBalance(int x);  // cannot make properties friends for error checking
+    bool trade(Player& other, std::string give, std::string receive);
     friend class Board;
 };
+
 #endif

@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 using namespace std;
-class LtBlue
+class LtBlue : public Property
 {
     int price;
     string name;

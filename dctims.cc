@@ -2,7 +2,7 @@
 
 DCTims::DCTims() {}
 
-DCTims::Payout(Player &affected) {
+void DCTims::payOut(Player &affected) {
     // double rolling code happens in main or board
 
 }

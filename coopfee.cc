@@ -2,6 +2,6 @@
 
 CoopFee::CoopFee() {}
 
-CoopFee::Payout(Player &affected) {
+void CoopFee::payOut(Player &affected) {
     affected.changeBalance(-150);
 }

@@ -2,6 +2,6 @@
 
 OSAP::OSAP() {}
 
-OSAP::Payout(Player &affected) {
+void OSAP::payOut(Player &affected) {
     affected.changeBalance(200);
 }

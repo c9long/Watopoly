@@ -2,7 +2,7 @@
 
 Needles::Needles() {}
 
-Needles::Payout(Player &affected) {
+void Needles::payOut(Player &affected) {
     // Player either gains or loses some amount of their savings
     //implement probability code
     int amount;

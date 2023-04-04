@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-class OSAp : public NonProperty
+class OSAP : public NonProperty
 {
 
 public:

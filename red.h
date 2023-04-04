@@ -19,6 +19,7 @@ public:
     void addImprovement();
     void auction();
     void purchase(Player &buyer);
+    ~Red();
 };
 
 #endif

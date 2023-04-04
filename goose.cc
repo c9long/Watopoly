@@ -2,6 +2,6 @@
 
 Goose::Goose() {}
 
-Goose::Payout(Player &affected) {
+void Goose::payOut(Player &affected) {
     // they get attacked and nothing happens lmao
 }

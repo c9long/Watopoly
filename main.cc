@@ -10,6 +10,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     int numPlayers = 0;
+    vector <Player*> players;
 
     if (argc > 1)
     {
@@ -44,7 +45,9 @@ int main(int argc, char *argv[])
                     cout << balance << endl; */
                     cout << location << endl;
                     Player* p = new Player{name, balance, piece, false, 0, 0};
+                    players.emplace_back(p);
                 }
+                Board b{players};
             }
         }
         else if (arg == "testing")

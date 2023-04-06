@@ -68,6 +68,10 @@ Board::Board(vector<Player*> players) : players{players} {
     td = new Textdisplay{};
 }
 
+void Board::updateTD() {
+    
+}
+
 void Board::trade(Player& other) {
     int itemGiven = -1;
     int itemReceived = -1;

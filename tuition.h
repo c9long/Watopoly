@@ -9,7 +9,7 @@ class Tuition : public NonProperty
 
 public:
     Tuition();
-    void payOut(Player &affected);
+    void payOut(Player &affected) override;
 };
 
 #endif

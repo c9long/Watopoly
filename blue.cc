@@ -58,6 +58,10 @@ void Blue::auction(){
 
 }
 
+int Blue::getNumImps() {
+    return numImps;
+}
+
 Blue::~Blue() {
     impTuit.clear();
 }

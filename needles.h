@@ -9,7 +9,7 @@ class Needles : public NonProperty
 
 public:
     Needles();
-    void payOut(Player &affected);
+    void payOut(Player &affected) override;
 };
 
 #endif

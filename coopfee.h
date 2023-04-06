@@ -9,7 +9,7 @@ class CoopFee : public NonProperty
 
 public:
     CoopFee();
-    void payOut(Player &affected);
+    void payOut(Player &affected) override;
 };
 
 #endif

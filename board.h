@@ -6,9 +6,11 @@
 
 using namespace std;
 
+class Textdisplay;
+
 class Board
 {
-
+    Textdisplay* td;
     vector<Square *> theBoard;
     map<Square *, Player *> owners;
     vector<Player *> players;
@@ -16,12 +18,13 @@ class Board
 
 public:
     Player *currPlayer;
-    Board();
+    Board(); // implemented
     void move();
     void next();
-    void trade(Player &other);
-    bool Board::hasImprovements(string propertyName);
-    ~Board();
-    void setPropertyMap();
+    void trade(Player &other); // in progress
+    bool hasImprovements(string propertyName); // implemented
+    ~Board(); // implemented
+    void setPropertyMap(); // implemented
+    friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
 #endif

@@ -6,12 +6,12 @@ class NonProperty : public Square
 {
 
 public:
-    void purchase(Player &buyer) override{};
-    void auction() override {};
-    void payTuition(Player &paying, Player &earning) override {};
-    void addImprovement() override {};
+    void purchase(Player &buyer) override;
+    void auction() override;
+    void payTuition(Player &paying, Player &earning) override;
+    void addImprovement() override;
     virtual void payOut(Player &affected) = 0;
-    int getNumImps() override {};
-    virtual ~NonProperty() = 0;
+    int getNumImps() override;
+    virtual ~NonProperty();
 };
 #endif

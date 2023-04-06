@@ -9,7 +9,7 @@ class OSAP : public NonProperty
 
 public:
     OSAP();
-    void payOut(Player &affected);
+    void payOut(Player &affected) override;
 };
 
 #endif

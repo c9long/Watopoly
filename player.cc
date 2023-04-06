@@ -22,12 +22,3 @@ void Player::next() {}
 void Player::changeBalance(int x) {
     balance += x;
 }
-
-bool Player::owns(Square* square, Player& player) {
-    if (owners.find(square) != owners.end()) {
-        Player* squareOwner = owners[square];
-        if (squareOwner == &player) return true;
-    }
-
-    return false;
-}

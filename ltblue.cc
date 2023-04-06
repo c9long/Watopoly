@@ -65,6 +65,10 @@ void LtBlue::auction(){
 
 }
 
+int LtBlue::getNumImps() {
+    return numImps;
+}
+
 LtBlue::~LtBlue() {
     impTuit.clear();
 }

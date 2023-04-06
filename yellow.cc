@@ -65,6 +65,10 @@ void Yellow::auction(){
 
 }
 
+int Yellow::getNumImps() {
+    return numImps;
+}
+
 Yellow::~Yellow() {
     impTuit.clear();
 }

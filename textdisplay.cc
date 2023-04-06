@@ -421,3 +421,7 @@ std::ostream &operator<<(std::ostream &out, const Textdisplay &td)
     }
     return out;
 }
+
+Textdisplay::~Textdisplay() {
+    theBoard.clear();
+}

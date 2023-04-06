@@ -18,8 +18,9 @@ public:
     void payTuition(Player &paying, Player &earning) override;
     void addImprovement() override;
     void auction() override;
+    void purchase(Player& buyer) override;
     int getNumImps() override;
-    void purchase(Player &buyer) override;
+    
     ~Blue();
 };
 

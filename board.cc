@@ -16,10 +16,13 @@
 #include "gototims.h"
 #include "dctims.h"
 #include "coopfee.h"
+#include "osap.h"
+#include "textdisplay.h"
 
 using namespace std;
 
 Board::Board() {
+    theBoard.emplace_back(new OSAP{});
     theBoard.emplace_back(new Brown{40, "AL"});
     theBoard.emplace_back(new SLC{});
     theBoard.emplace_back(new Brown{60, "ML"});
@@ -55,9 +58,14 @@ Board::Board() {
     theBoard.emplace_back(new SLC{});
     theBoard.emplace_back(new Green{320, "C2"});
     theBoard.emplace_back(new Residence{});
+    theBoard.emplace_back(new Needles{});
     theBoard.emplace_back(new Blue{350, "MC"});
     theBoard.emplace_back(new CoopFee{});
     theBoard.emplace_back(new Blue{400, "DC"});
+
+    setPropertyMap(); 
+
+    td = new Textdisplay{};
 }
 
 void Board::trade(Player& other) {
@@ -131,33 +139,46 @@ void Board::trade(Player& other) {
 
 bool Board::hasImprovements(string propertyName) {
 
-    for (auto it = theBoard.begin(); it != theBoard.end(); ++it) {
-        if ((*it)->getNumImps() > 0) return true;
-    }
+    if (propertyMap[propertyName]->getNumImps() > 0) return true;
 
     return false;
 }
 
 void Board::setPropertyMap() {
-    /* propertyMap["AL"] = &AL;
-    propertyMap["ML"] = &ML;
-    propertyMap["ECH"] = &ECH;
-    propertyMap["PAS"] = &PAS;
-    propertyMap["HH"] = &HH;
-    propertyMap["RCH"] = &RCH;
-    propertyMap["DWE"] = &DWE;
-    propertyMap["CPH"] = &CPH;
-    propertyMap["LHI"] = &LHI;
-    propertyMap["MBH"] = &MBH;
-    propertyMap["OPT"] = &OPT;
-    propertyMap["EV1"] = &EV1;
-    propertyMap["EV2"] = &EV2;
-    propertyMap["EV3"] = &EV3;
-    propertyMap["B1"] = &B1;
-    propertyMap["B2"] = &B2;
-    propertyMap["EIT"] = &EIT;
-    propertyMap["ESC"] = &ESC;
-    propertyMap["C2"] = &C2;
-    propertyMap["MC"] = &MC;
-    propertyMap["DC"] = &DC; */
+    propertyMap["AL"] = theBoard.at(1);
+    propertyMap["ML"] = theBoard.at(3);
+    propertyMap["ECH"] = theBoard.at(6);
+    propertyMap["PAS"] = theBoard.at(8);
+    propertyMap["HH"] = theBoard.at(9);
+    propertyMap["RCH"] = theBoard.at(11);
+    propertyMap["DWE"] = theBoard.at(13);
+    propertyMap["CPH"] = theBoard.at(14);
+    propertyMap["LHI"] = theBoard.at(16);
+    propertyMap["MBH"] = theBoard.at(18);
+    propertyMap["OPT"] = theBoard.at(19);
+    propertyMap["EV1"] = theBoard.at(21);
+    propertyMap["EV2"] = theBoard.at(23);
+    propertyMap["EV3"] = theBoard.at(24);
+    propertyMap["PHYS"] = theBoard.at(26);
+    propertyMap["B1"] = theBoard.at(27);
+    propertyMap["B2"] = theBoard.at(29);
+    propertyMap["EIT"] = theBoard.at(31);
+    propertyMap["ESC"] = theBoard.at(32);
+    propertyMap["C2"] = theBoard.at(34);
+    propertyMap["MC"] = theBoard.at(37);
+    propertyMap["DC"] = theBoard.at(39);
+}
+
+Board::~Board() {
+    currPlayer = nullptr;
+    theBoard.clear();
+    owners.clear();
+    players.clear();
+    propertyMap.clear();
+    delete td;
+}
+
+ostream &operator<<(std::ostream &out, const Board &b) {
+    out << *(b.td);
+    return out;
 }

@@ -62,6 +62,10 @@ void Brown::auction(){
 
 }
 
+int Brown::getNumImps() {
+    return numImps;
+}
+
 Brown::~Brown() {
     impTuit.clear();
 }

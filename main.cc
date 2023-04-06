@@ -3,15 +3,17 @@
 #include <string>
 #include "square.h" // can be changed to forward declaration
 #include "textdisplay.h"
+#include "board.h"
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
+    Board b;
+    
     int numPlayers = 0;
 
-    Textdisplay* td = new Textdisplay();
-    cout << *td;
+    cout << b;
 
     if (argc > 1)
     {

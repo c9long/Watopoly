@@ -10,7 +10,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     Board b;
-    
+
     int numPlayers = 0;
 
     cout << b;
@@ -50,9 +50,15 @@ int main(int argc, char *argv[])
                 }
             }
         }
+        else if (arg == "testing")
+        {
+        }
     }
     else
     {
         cout << "How many players would you like to enter into your new game?" << endl;
+        while (!(cin >> numPlayers))
+        {
+        }
     }
 }

@@ -48,9 +48,9 @@ void Blue::purchase(Player &buyer)
         buyer.changeBalance(-price);
         owner = &buyer;
     }
-    catch (...)
+    catch (invalid_argument& e)
     {
-        std::cout << "Not enough funds to make this purchase" << std::endl;
+        std::cout << e.what() << std::endl;
     }
 }
 

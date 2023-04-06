@@ -20,5 +20,6 @@ void Player::roll() {
 void Player::next() {}
 
 void Player::changeBalance(int x) {
+    if (balance + x < 0) throw invalid_argument("You do not have enough funds to make this purchase");
     balance += x;
 }

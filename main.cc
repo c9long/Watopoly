@@ -10,7 +10,16 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     int numPlayers = 0;
-    vector <Player*> players;
+    vector<Player *> players;
+    map<char, Player *> pieces;
+    pieces['G'] = nullptr;
+    pieces['B'] = nullptr;
+    pieces['D'] = nullptr;
+    pieces['P'] = nullptr;
+    pieces['S'] = nullptr;
+    pieces['$'] = nullptr;
+    pieces['L'] = nullptr;
+    pieces['T'] = nullptr;
 
     if (argc > 1)
     {
@@ -44,7 +53,7 @@ int main(int argc, char *argv[])
                     cout << timsCups << endl;
                     cout << balance << endl; */
                     cout << location << endl;
-                    Player* p = new Player{name, balance, piece, false, 0, 0};
+                    Player *p = new Player{name, balance, piece, false, 0, 0}; // needs changing
                     players.emplace_back(p);
                 }
                 Board b{players};
@@ -56,12 +65,30 @@ int main(int argc, char *argv[])
     }
     else
     {
-        cout << "How many players would you like to enter into your new game?" << endl;
-        while (!(cin >> numPlayers))
+        while (numPlayers < 2 || numPlayers > 6)
         {
+            cout << "How many players would you like to enter into your new game?" << endl;
+            cin >> numPlayers;
         }
-        for (int i = 0; i < numPlayers; ++i) {
-            
+        for (int i = 0; i < numPlayers; ++i)
+        {
+            cout << "Enter Player " << i + 1 << "'s name" << endl;
+            string name;
+            cin >> name;
+            cin.clear();
+            cout << "Select your piece (G, B, D, P, S, $, L, or T)" << endl;
+            char piece;
+            cin >> piece;
+            while ((piece != 'G' && piece != 'B' && piece != 'D' && piece != 'P' && piece != 'S' && piece != '$' && piece != 'L' && piece != 'T') || pieces[piece])
+            {
+                cout << "Please choose a valid/available piece" << endl;
+                cin >> piece;
+            }
+            Player *p = new Player{name, 1500, piece, false, 0, 0};
+            pieces[piece] = p;
+            players.emplace_back(p);
         }
+        Board b{players};
+        cout << b;
     }
 }

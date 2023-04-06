@@ -7,31 +7,56 @@
 #include "yellow.h"
 #include "green.h"
 #include "blue.h"
+#include "residence.h"
+#include "gym.h"
+#include "slc.h"
+#include "needles.h"
+#include "tuition.h"
+#include "goose.h"
+#include "gototims.h"
+#include "dctims.h"
+#include "coopfee.h"
 
 using namespace std;
 
 Board::Board() {
     theBoard.emplace_back(new Brown{40, "AL"});
+    theBoard.emplace_back(new SLC{});
     theBoard.emplace_back(new Brown{60, "ML"});
+    theBoard.emplace_back(new Tuition{});
+    theBoard.emplace_back(new Residence{});
     theBoard.emplace_back(new LtBlue{100, "ECH"});
+    theBoard.emplace_back(new Needles{});
     theBoard.emplace_back(new LtBlue{100, "PAS"});
     theBoard.emplace_back(new LtBlue{120, "HH"});
+    theBoard.emplace_back(new DCTims{});
     theBoard.emplace_back(new Pink{140, "RCH"});
+    theBoard.emplace_back(new Gym{});
     theBoard.emplace_back(new Pink{140, "DWE"});
     theBoard.emplace_back(new Pink{160, "CPH"});
+    theBoard.emplace_back(new Residence{});
     theBoard.emplace_back(new Orange{180, "LHI"});
+    theBoard.emplace_back(new SLC{});
     theBoard.emplace_back(new Orange{180, "BMH"});
     theBoard.emplace_back(new Orange{200, "OPT"});
+    theBoard.emplace_back(new Goose{});
     theBoard.emplace_back(new Red{220, "EV1"});
+    theBoard.emplace_back(new Needles{});
     theBoard.emplace_back(new Red{220, "EV2"});
     theBoard.emplace_back(new Red{240, "EV3"});
+    theBoard.emplace_back(new Residence{});
     theBoard.emplace_back(new Yellow{260, "PHYS"});
     theBoard.emplace_back(new Yellow{260, "B1"});
+    theBoard.emplace_back(new Gym{});
     theBoard.emplace_back(new Yellow{280, "B2"});
+    theBoard.emplace_back(new GoToTims{});
     theBoard.emplace_back(new Green{300, "EIT"});
     theBoard.emplace_back(new Green{300, "ESC"});
+    theBoard.emplace_back(new SLC{});
     theBoard.emplace_back(new Green{320, "C2"});
+    theBoard.emplace_back(new Residence{});
     theBoard.emplace_back(new Blue{350, "MC"});
+    theBoard.emplace_back(new CoopFee{});
     theBoard.emplace_back(new Blue{400, "DC"});
 }
 

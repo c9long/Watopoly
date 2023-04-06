@@ -17,9 +17,6 @@ class Player {
     bool inJail;
     int numJailRolls;
     int locId;
-    Square* location;
-    std::map<std::string, Square*> propertyMap; // Maps string and property name
-    void setPropertyMap();
     void roll(); // returns total roll num
     void next();
     bool hasImprovements(std::string propertyName);
@@ -28,7 +25,7 @@ class Player {
     // bool trade(std::string name, std::string give, std::string receive);
 
    public:
-    Player(std::string name, int balance, char piece, bool inJail, int numJailRolls, int locId, Square* location);
+    Player(std::string name, int balance, char piece, bool inJail, int numJailRolls, int locId);
     void changeBalance(int x);  // cannot make properties friends for error checking
     bool trade(Player& other, std::string give, std::string receive);
     friend class Board;

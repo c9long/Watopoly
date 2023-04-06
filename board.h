@@ -1,12 +1,11 @@
 #ifndef BOARD_H
 #define BOARD_H
 #include "player.h"
+#include "textdisplay.h"
 #include <vector>
 #include <map>
 
 using namespace std;
-
-class Textdisplay;
 
 class Board
 {
@@ -18,13 +17,14 @@ class Board
 
 public:
     Player *currPlayer;
-    Board(); // implemented
+    Board(vector<Player*> players); // implemented
     void move();
     void next();
     void trade(Player &other); // in progress
-    bool hasImprovements(string propertyName); // implemented
+    bool Board::hasImprovements(string propertyName); // implemented
     ~Board(); // implemented
     void setPropertyMap(); // implemented
-    friend std::ostream &operator<<(std::ostream &out, const Board &b);
+    void updateTD();
+    friend ostream &operator<<(std::ostream &out, const Board &b);
 };
 #endif

@@ -21,7 +21,7 @@
 
 using namespace std;
 
-Board::Board() {
+Board::Board(vector<Player*> players) : players{players} {
     theBoard.emplace_back(new OSAP{});
     theBoard.emplace_back(new Brown{40, "AL"});
     theBoard.emplace_back(new SLC{});

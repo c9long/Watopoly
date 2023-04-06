@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Player::Player(string name, int balance, char piece, bool inJail, int numJailRolls, int locId, Square* location) : name{name}, balance{balance}, piece{piece}, inJail{inJail}, numJailRolls{numJailRolls}, locId{locId}, location{location} {}
+Player::Player(string name, int balance, char piece, bool inJail, int numJailRolls, int locId) : name{name}, balance{balance}, piece{piece}, inJail{inJail}, numJailRolls{numJailRolls}, locId{locId} {}
 
 void Player::roll() {
     int die1 = rand() % 6 + 1;

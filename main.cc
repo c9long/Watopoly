@@ -9,11 +9,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    Board b;
-
     int numPlayers = 0;
-
-    cout << b;
 
     if (argc > 1)
     {
@@ -45,8 +41,9 @@ int main(int argc, char *argv[])
                     /* cout << name << endl;
                     cout << piece << endl;
                     cout << timsCups << endl;
-                    cout << balance << endl;
-                    cout << location << endl; */
+                    cout << balance << endl; */
+                    cout << location << endl;
+                    Player* p = new Player{name, balance, piece, false, 0, 0};
                 }
             }
         }

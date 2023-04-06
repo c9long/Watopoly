@@ -21,7 +21,7 @@ public:
     void move();
     void next();
     void trade(Player &other); // in progress
-    bool Board::hasImprovements(string propertyName); // implemented
+    bool hasImprovements(string propertyName); // implemented
     ~Board(); // implemented
     void setPropertyMap(); // implemented
     void updateTD();

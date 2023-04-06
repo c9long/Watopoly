@@ -60,5 +60,8 @@ int main(int argc, char *argv[])
         while (!(cin >> numPlayers))
         {
         }
+        for (int i = 0; i < numPlayers; ++i) {
+            
+        }
     }
 }

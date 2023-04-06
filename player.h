@@ -4,8 +4,6 @@
 #include <string>
 #include <map>
 
-#include "square.h"
-#include "property.h"
 
 class Square;
 class Player {

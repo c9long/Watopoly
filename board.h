@@ -9,16 +9,19 @@ using namespace std;
 class Board
 {
 
-    Player *currPlayer;
     vector<Square *> theBoard;
     map<Square*, Player*> owners;
     vector<Player*> players;
+    std::map<std::string, Square*> propertyMap; // Maps string and property name
 
 public:
+    Player *currPlayer;
     Board();
     void move();
     void next();
     void trade(Player& other);
+    bool Board::hasImprovements(string propertyName);
     ~Board();
+    void setPropertyMap();
 };
 #endif

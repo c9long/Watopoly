@@ -15,7 +15,7 @@ class Blue : public Property
 
 public:
     Blue(int price, string name);
-    void payTuition(Player &paying, Player &earning);
+    void payTuition(Player &paying, Player &earning) override;
     void addImprovement();
     void auction();
     int getNumImps();

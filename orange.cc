@@ -65,6 +65,10 @@ void Orange::auction(){
 
 }
 
+int Orange::getNumImps() {
+    return numImps;
+}
+
 Orange::~Orange() {
     impTuit.clear();
 }

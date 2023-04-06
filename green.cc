@@ -65,6 +65,10 @@ void Green::auction(){
 
 }
 
+int Green::getNumImps() {
+    return numImps;
+}
+
 Green::~Green() {
     impTuit.clear();
 }

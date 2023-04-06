@@ -65,6 +65,10 @@ void Pink::auction(){
 
 }
 
+int Pink::getNumImps() {
+    return numImps;
+}
+
 Pink::~Pink() {
     impTuit.clear();
 }

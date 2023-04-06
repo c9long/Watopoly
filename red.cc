@@ -65,6 +65,10 @@ void Red::auction(){
 
 }
 
+int Red::getNumImps() {
+    return numImps;
+}
+
 Red::~Red() {
     impTuit.clear();
 }

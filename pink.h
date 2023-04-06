@@ -16,10 +16,10 @@ class Pink : public Property
 public:
     Pink(int price, string name);
     void payTuition(Player &paying, Player &earning) override;
-    void addImprovement();
-    void auction();
-    int getNumImps();
-    void purchase(Player &buyer);
+    void addImprovement() override;
+    void auction() override;
+    int getNumImps() override;
+    void purchase(Player &buyer) override;
     ~Pink();
 };
 

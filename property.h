@@ -20,11 +20,12 @@ protected:
     Player *owner = nullptr;
 
 public:
-    virtual void purchase() = 0;
+    virtual void purchase(Player &buyer) = 0;
     virtual void auction() = 0;
     virtual void payTuition(Player &paying, Player &earning) = 0;
     virtual void addImprovement() = 0;
-    void payOut(Player &){};
-    virtual ~Property() {owner = nullptr;}
+    void payOut(Player &affected) override {};
+    int getNumImps() = 0;
+    virtual ~Property() { owner = nullptr; }
 };
 #endif

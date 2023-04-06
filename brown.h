@@ -16,10 +16,10 @@ class Brown : public Property
 public:
     Brown(int price, string name);
     void payTuition(Player &paying, Player &earning) override;
-    void addImprovement();
-    void auction();
-    void purchase(Player& buyer);
-    int getNumImps();
+    void addImprovement() override;
+    void auction() override;
+    void purchase(Player& buyer) override;
+    int getNumImps() override;
     
     ~Brown();
 };

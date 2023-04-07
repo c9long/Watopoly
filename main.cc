@@ -109,5 +109,41 @@ int main(int argc, char *argv[]) {
         }
         Board b{players};
         cout << b;
+
+        cout << "Player " << b.currPlayerNum + 1 << " turn!" << endl;
+        // while game hasn't ended
+        while (!b.gameOver()) {
+            string cmd;
+            cin >> cmd;
+            while (cmd != "roll" && cmd != "next" && cmd != "trade" && cmd != "improve" && cmd != "mortgage" && cmd != "unmortgage" && cmd != "assets" && cmd != "all" && cmd != "save")
+            {
+                if (cmd == "bankrupt") { // and b.currPlayer->isBankrupt()
+                    // check if actually bankrupt and break
+                }
+                cout << "Please enter a valid command" << endl;
+                cin >> cmd;
+            }
+            if (cmd == "roll") {
+                b.move();
+            } else if (cmd == "next") {
+                b.next(numPlayers);
+            } else if (cmd == "trade") {
+                
+            } else if (cmd == "improve") {
+                
+            } else if (cmd == "mortgage") {
+                
+            } else if (cmd == "unmortgage") {
+                
+            } else if (cmd == "assets") {
+                
+            } else if (cmd == "all") {
+                
+            } else if (cmd == "save") {
+                
+            } else if (cmd == "bankrupt") {
+                
+            }
+        }
     }
 }

@@ -1,10 +1,9 @@
 #include "player.h"
-
+#include "square.h"
+#include <iostream>
 #include <cstdlib>
 #include <map>
 #include <string>
-
-#include "square.h"
 
 using namespace std;
 
@@ -19,6 +18,7 @@ void Player::roll() {
     int die2 = rand() % 6 + 1;
 
     rollSum = die1 + die2;
+    cout << "You rolled a " << die1 << " and a " << die2 << ". Moving " << die1 + die2 << " steps now." << endl;
 }
 
 void Player::next() {}

@@ -18,6 +18,7 @@
 #include "coopfee.h"
 #include "osap.h"
 #include "textdisplay.h"
+#include <iostream>
 
 using namespace std;
 
@@ -66,6 +67,35 @@ Board::Board(vector<Player*> players) : players{players} {
     setPropertyMap(); 
 
     td = new Textdisplay{};
+    currPlayerNum = 0;
+    currPlayer = players[currPlayerNum];
+}
+
+void Board::move() {
+    currPlayer->roll();
+    currPlayer->locId = (currPlayer->locId + currPlayer->rollSum) % 40; 
+    updateTD();
+    int index = currPlayer->locId;
+    if (isProperty[index]) {
+        if (!owners[theBoard[index]]) {
+            // we need a function that calculates the amount owed for the property you're on
+            // makes it easier to have bankrupt in board, rather than in each property
+            cout << "You landed on an unowned property. Would you like to purchase it?" << endl;
+            // input decision -> purchase or auction 
+        } else if (owners[theBoard[index]] != currPlayer) {
+            cout << "You landed on someone else's property. You owe " << owners[theBoard[index]]->name << " $___!" << endl;
+            // check if bankrupt, otherwise pay. 
+        }
+    } else {
+        //theBoard[index]->payOut(*currPlayer);
+    }
+    // need to implement rolling doubles
+}
+
+void Board::next(int numPlayers) {
+    currPlayerNum = (currPlayerNum + 1) % numPlayers;
+    currPlayer = players[currPlayerNum];
+    cout << "Player " << currPlayerNum + 1 << " turn!" << endl;
 }
 
 void Board::updateTD() {
@@ -166,7 +196,7 @@ void Board::setPropertyMap() {
     propertyMap["DWE"] = theBoard.at(13);
     propertyMap["CPH"] = theBoard.at(14);
     propertyMap["LHI"] = theBoard.at(16);
-    propertyMap["MBH"] = theBoard.at(18);
+    propertyMap["BMH"] = theBoard.at(18);
     propertyMap["OPT"] = theBoard.at(19);
     propertyMap["EV1"] = theBoard.at(21);
     propertyMap["EV2"] = theBoard.at(23);

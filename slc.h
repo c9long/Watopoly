@@ -9,7 +9,7 @@ class SLC : public NonProperty
 
 public:
     SLC();
-    void payOut(Player &affected);
+    void payOut(Player &affected); //in progress, need to figure out how to implement moves
 };
 
 #endif

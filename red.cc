@@ -65,6 +65,10 @@ void Red::auction(){
 
 }
 
+void Red::setNumImps(int num) {
+    numImps = num;
+}
+
 int Red::getNumImps() {
     return numImps;
 }

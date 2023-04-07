@@ -58,6 +58,10 @@ void Blue::auction(){
 
 }
 
+void Blue::setNumImps(int num) {
+    numImps = num;
+}
+
 int Blue::getNumImps() {
     return numImps;
 }

@@ -19,6 +19,7 @@ public:
     void addImprovement() override;
     void auction() override;
     void purchase(Player& buyer) override;
+    void setNumImps(int num) override;
     int getNumImps() override;
     
     ~Brown();

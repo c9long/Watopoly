@@ -152,6 +152,10 @@ bool Board::hasImprovements(string propertyName) {
     return false;
 }
 
+vector<Player *> Board::getPlayers() {
+    return players;
+}
+
 void Board::setPropertyMap() {
     propertyMap["AL"] = theBoard.at(1);
     propertyMap["ML"] = theBoard.at(3);
@@ -175,6 +179,14 @@ void Board::setPropertyMap() {
     propertyMap["C2"] = theBoard.at(34);
     propertyMap["MC"] = theBoard.at(37);
     propertyMap["DC"] = theBoard.at(39);
+}
+
+Square* Board::getPropertyFromMap(std::string propertyName) {
+    return propertyMap[propertyName];
+}
+
+void Board::addOwner(Square * square, Player* player) {
+    owners.emplace(square, player);
 }
 
 Board::~Board() {

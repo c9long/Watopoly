@@ -65,6 +65,10 @@ void LtBlue::auction(){
 
 }
 
+void LtBlue::setNumImps(int num) {
+    numImps = num;
+}
+
 int LtBlue::getNumImps() {
     return numImps;
 }

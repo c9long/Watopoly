@@ -65,6 +65,10 @@ void Yellow::auction(){
 
 }
 
+void Yellow::setNumImps(int num) {
+    numImps = num;
+}
+
 int Yellow::getNumImps() {
     return numImps;
 }

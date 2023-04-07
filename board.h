@@ -24,8 +24,12 @@ public:
     void trade(Player &other); // in progress
     bool hasImprovements(string propertyName); // implemented
     ~Board(); // implemented
+    vector<Player *> getPlayers(); // Getter for players vector
     void setPropertyMap(); // implemented
+    Square* getPropertyFromMap(std::string propertyName);
     void updateTD();
+    void addOwner(Square * square, Player* player);
+
     friend ostream &operator<<(std::ostream &out, const Board &b);
 };
 #endif

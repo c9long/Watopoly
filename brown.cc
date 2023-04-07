@@ -62,6 +62,10 @@ void Brown::auction(){
 
 }
 
+void Brown::setNumImps(int num) {
+    numImps = num;
+}
+
 int Brown::getNumImps() {
     return numImps;
 }

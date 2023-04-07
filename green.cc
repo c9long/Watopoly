@@ -65,6 +65,10 @@ void Green::auction(){
 
 }
 
+void Green::setNumImps(int num) {
+    numImps = num;
+}
+
 int Green::getNumImps() {
     return numImps;
 }

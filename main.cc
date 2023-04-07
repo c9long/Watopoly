@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
                     ss >> property >> ownerName >> tmpImpsStr;
                     numImps = stoi(tmpImpsStr);
 
-                    Square *square = b.getPropertyFromMap(property);  // TODO: create getPropertyFromMap inside board
+                    Square *square = b.getPropertyFromMap(property);
                     Player *owner = nullptr;
 
                     // Find player from player vector and set owner to Player

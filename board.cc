@@ -72,6 +72,10 @@ void Board::updateTD() {
     
 }
 
+bool Board::gameOver() {
+    return (players.size() == 1);
+}
+
 void Board::trade(Player& other) {
     int itemGiven = -1;
     int itemReceived = -1;

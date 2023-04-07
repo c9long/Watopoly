@@ -18,6 +18,7 @@ class Board
 public:
     Player *currPlayer;
     Board(vector<Player*> players); // implemented
+    bool gameOver();
     void move();
     void next();
     void trade(Player &other); // in progress

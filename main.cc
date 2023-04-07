@@ -1,14 +1,15 @@
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <sstream>
 #include <string>
-#include "square.h" // can be changed to forward declaration
-#include "textdisplay.h"
+
 #include "board.h"
+#include "square.h"  // can be changed to forward declaration
+#include "textdisplay.h"
 
 using namespace std;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     int numPlayers = 0;
     vector<Player *> players;
     map<char, Player *> pieces;
@@ -21,18 +22,14 @@ int main(int argc, char *argv[])
     pieces['L'] = nullptr;
     pieces['T'] = nullptr;
 
-    if (argc > 1)
-    {
+    if (argc > 1) {
         string arg = argv[1];
-        if (arg == "-load")
-        {
+        if (arg == "-load") {
             ifstream ifs{argv[2]};
             string s;
-            if (ifs >> s)
-            {
+            if (ifs >> s) {
                 numPlayers = stoi(s);
-                for (int i = 0; i < numPlayers; ++i)
-                {
+                for (int i = 0; i < numPlayers; ++i) {
                     string name;
                     char piece;
                     int timsCups;
@@ -53,25 +50,48 @@ int main(int argc, char *argv[])
                     cout << timsCups << endl;
                     cout << balance << endl; */
                     cout << location << endl;
-                    Player *p = new Player{name, balance, piece, false, 0, 0}; // needs changing
+                    Player *p = new Player{name, balance, piece, false, 0, 0};  // needs changing
                     players.emplace_back(p);
                 }
                 Board b{players};
+
+                // Set each property and its owner and improvements
+                string currLine;
+                while (getline(ifs, currLine)) {
+                    stringstream ss(currLine);
+                    string property;
+                    string ownerName;
+                    string tmpImpsStr;
+                    int numImps;
+
+                    ss >> property >> ownerName >> tmpImpsStr;
+                    numImps = stoi(tmpImpsStr);
+
+                    Square *square = b.getPropertyFromMap(property);
+                    Player *owner = nullptr;
+
+                    // Find player from player vector and set owner to Player
+                    if (ownerName != "BANK") {
+                        for (auto p : b.getPlayers()) {
+                            if (ownerName == p->getName()) {
+                                owner = p;
+                                break;
+                            }
+                        }
+                    }
+
+                    b.addOwner(square, owner);
+                    square->setNumImps(numImps);
+                }
             }
+        } else if (arg == "testing") {
         }
-        else if (arg == "testing")
-        {
-        }
-    }
-    else
-    {
-        while (numPlayers < 2 || numPlayers > 6)
-        {
+    } else {
+        while (numPlayers < 2 || numPlayers > 6) {
             cout << "How many players would you like to enter into your new game?" << endl;
             cin >> numPlayers;
         }
-        for (int i = 0; i < numPlayers; ++i)
-        {
+        for (int i = 0; i < numPlayers; ++i) {
             cout << "Enter Player " << i + 1 << "'s name" << endl;
             string name;
             cin >> name;
@@ -79,8 +99,7 @@ int main(int argc, char *argv[])
             cout << "Select your piece (G, B, D, P, S, $, L, or T)" << endl;
             char piece;
             cin >> piece;
-            while ((piece != 'G' && piece != 'B' && piece != 'D' && piece != 'P' && piece != 'S' && piece != '$' && piece != 'L' && piece != 'T') || pieces[piece])
-            {
+            while ((piece != 'G' && piece != 'B' && piece != 'D' && piece != 'P' && piece != 'S' && piece != '$' && piece != 'L' && piece != 'T') || pieces[piece]) {
                 cout << "Please choose a valid/available piece" << endl;
                 cin >> piece;
             }

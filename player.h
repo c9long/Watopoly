@@ -24,6 +24,7 @@ class Player {
 
    public:
     Player(std::string name, int balance, char piece, bool inJail, int numJailRolls, int locId);
+    std::string getName();
     void changeBalance(int x);  // cannot make properties friends for error checking
     bool trade(Player& other, std::string give, std::string receive);
     friend class Board;

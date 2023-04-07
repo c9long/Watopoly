@@ -11,6 +11,7 @@ public:
     void payTuition(Player &paying, Player &earning) override;
     void addImprovement() override;
     virtual void payOut(Player &affected) = 0;
+    void setNumImps(int num) override;
     int getNumImps() override;
     virtual ~NonProperty();
 };

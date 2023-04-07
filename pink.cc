@@ -65,6 +65,10 @@ void Pink::auction(){
 
 }
 
+void Pink::setNumImps(int num) {
+    numImps = num;
+}
+
 int Pink::getNumImps() {
     return numImps;
 }

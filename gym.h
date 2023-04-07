@@ -7,6 +7,7 @@ class Gym : public Property
     void auction() override;
     void payTuition(Player &paying, Player &earning) override;
     void addImprovement() override;
+    void setNumImps(int num) override;
     int getNumImps() override;
     virtual ~Gym() {}
 };

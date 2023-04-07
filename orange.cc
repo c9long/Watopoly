@@ -65,6 +65,10 @@ void Orange::auction(){
 
 }
 
+void Orange::setNumImps(int num) {
+    numImps = num;
+}
+
 int Orange::getNumImps() {
     return numImps;
 }

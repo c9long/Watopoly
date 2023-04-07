@@ -7,7 +7,7 @@
 
 class Square;
 class Player {
-   protected:
+   //protected:
     std::string name;
     int balance;
     char piece;
@@ -28,6 +28,7 @@ class Player {
     void changeBalance(int x);  // cannot make properties friends for error checking
     bool trade(Player& other, std::string give, std::string receive);
     friend class Board;
+    friend class SLC;
 };
 
 #endif

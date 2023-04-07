@@ -71,8 +71,10 @@ Board::Board(vector<Player*> players) : players{players} {
     currPlayer = players[currPlayerNum];
 }
 
-void Board::move() {
-    currPlayer->roll();
+void Board::move(bool newRoll) {
+    if (newRoll) {
+        currPlayer->roll();
+    }
     currPlayer->locId = (currPlayer->locId + currPlayer->rollSum) % 40; 
     updateTD();
     int index = currPlayer->locId;
@@ -80,14 +82,29 @@ void Board::move() {
         if (!owners[theBoard[index]]) {
             // we need a function that calculates the amount owed for the property you're on
             // makes it easier to have bankrupt in board, rather than in each property
-            cout << "You landed on an unowned property. Would you like to purchase it?" << endl;
+            cout << "You landed on an unowned property. Would you like to purchase it? [y/n]" << endl;
             // input decision -> purchase or auction 
+            char buying;
+            cin >> buying;
+            if (buying == 'y') {
+
+            }
         } else if (owners[theBoard[index]] != currPlayer) {
             cout << "You landed on someone else's property. You owe " << owners[theBoard[index]]->name << " $___!" << endl;
             // check if bankrupt, otherwise pay. 
         }
     } else {
-        //theBoard[index]->payOut(*currPlayer);
+        //theBoard[index]->payOut(*currPlayer);  --> can't call payOut like this because theBoard has Square*
+        // if landed on slc, need to move again, without rolling, using the changed rollSum value
+        if (index == 2 || index == 17 || index == 33) {
+            cout << "You landed on SLC" << endl;
+            // need to call the payOut function in SLC
+            // currently, it just moves the same amount of steps as the previous roll
+            move(false);
+        } else if (index == 7 || index == 22 || index == 36) {
+            cout << "You landed on Needles Hall" << endl;
+            // need to call the payOut function in Needles
+        }
     }
     // need to implement rolling doubles
 }

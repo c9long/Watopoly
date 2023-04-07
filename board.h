@@ -24,7 +24,7 @@ public:
     int currPlayerNum;
     Board(vector<Player*> players); // implemented
     bool gameOver();
-    void move();
+    void move(bool newRoll = true);
     void next(int numPlayers);
     void trade(Player &other); // in progress
     bool hasImprovements(string propertyName); // implemented

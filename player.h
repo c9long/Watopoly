@@ -7,7 +7,7 @@
 
 class Square;
 class Player {
-   //protected:
+protected:
     std::string name;
     int balance;
     char piece;

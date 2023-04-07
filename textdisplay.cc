@@ -400,7 +400,7 @@ std::ostream &operator<<(std::ostream &out, const Textdisplay &td)
         {
             out << '|' << td.theBoard.at(23).at((i - 1) % 5) << '|' << "                                                                       |" << td.theBoard.at(24).at((i - 1) % 5) << '|' << endl;
         }
-        else if (i > 41 && i <= 45)
+        else if (i > 40 && i <= 45)
         {
             out << '|' << td.theBoard.at(25).at((i - 1) % 5) << '|' << "                                                                       |" << td.theBoard.at(26).at((i - 1) % 5) << '|' << endl;
         }

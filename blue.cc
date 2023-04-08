@@ -66,6 +66,10 @@ int Blue::getNumImps() {
     return numImps;
 }
 
+string Blue::getName() {
+    return name;
+}
+
 Blue::~Blue() {
     impTuit.clear();
 }

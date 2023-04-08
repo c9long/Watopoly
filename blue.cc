@@ -48,9 +48,9 @@ void Blue::purchase(Player &buyer)
         buyer.changeBalance(-price);
         owner = &buyer;
     }
-    catch (invalid_argument& e)
+    catch (invalid_argument ia)
     {
-        std::cout << e.what() << std::endl;
+        std::cout << ia.what() << std::endl;
     }
 }
 

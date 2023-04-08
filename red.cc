@@ -53,11 +53,12 @@ void Red::purchase(Player &buyer)
     try
     {
         buyer.changeBalance(-price);
-        owner = &buyer;
+        owner = &buyer; // remove this when below error handled by board; remove owner field from property overall
     }
-    catch (invalid_argument ia)
+    catch (invalid_argument& ia)
     {
         std::cout << ia.what() << std::endl;
+        throw; // re-raise to be handled in Board
     }
 }
 

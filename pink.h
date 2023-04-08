@@ -21,6 +21,7 @@ public:
     void setNumImps(int num) override;
     int getNumImps() override;
     std::string getName() override;
+    int getPrice() override;
     void purchase(Player &buyer) override;
     ~Pink();
 };

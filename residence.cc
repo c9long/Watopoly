@@ -24,3 +24,7 @@ string Residence::getName() {
 int Residence::getNumImps() {
     return 0;
 }
+
+int Residence::getPrice() {
+    return 200;
+}

@@ -22,6 +22,7 @@ public:
     void setNumImps(int num) override;
     int getNumImps() override;
     std::string getName() override;
+    int getPrice() override;
     
     ~Blue();
 };

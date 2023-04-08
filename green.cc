@@ -77,6 +77,10 @@ string Green::getName() {
     return name;
 }
 
+int Green::getPrice() {
+    return price;
+}
+
 Green::~Green() {
     impTuit.clear();
 }

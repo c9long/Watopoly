@@ -77,6 +77,10 @@ string Orange::getName() {
     return name;
 }
 
+int Orange::getPrice() {
+    return price;
+}
+
 Orange::~Orange() {
     impTuit.clear();
 }

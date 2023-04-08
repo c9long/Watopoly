@@ -77,6 +77,10 @@ string Red::getName() {
     return name;
 }
 
+int Red::getPrice() {
+    return price;
+}
+
 Red::~Red() {
     impTuit.clear();
 }

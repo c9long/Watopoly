@@ -70,6 +70,10 @@ string Blue::getName() {
     return name;
 }
 
+int Blue::getPrice() {
+    return price;
+}
+
 Blue::~Blue() {
     impTuit.clear();
 }

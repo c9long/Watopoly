@@ -20,6 +20,10 @@ int Gym::getNumImps() {
     return 0;
 }
 
+int Gym::getPrice() {
+    return 150;
+}
+
 string Gym::getName() {
     return 0;
 }

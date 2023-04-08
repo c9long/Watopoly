@@ -77,6 +77,10 @@ string Yellow::getName() {
     return name;
 }
 
+int Yellow::getPrice() {
+    return price;
+}
+
 Yellow::~Yellow() {
     impTuit.clear();
 }

@@ -77,6 +77,10 @@ string LtBlue::getName() {
     return name;
 }
 
+int LtBlue::getPrice() {
+    return price;
+}
+
 LtBlue::~LtBlue() {
     impTuit.clear();
 }

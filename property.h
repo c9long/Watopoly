@@ -28,6 +28,7 @@ public:
     void payOut(Player &affected) override;
     virtual int getNumImps() = 0;
     virtual std::string getName() = 0;
+    virtual int getPrice() = 0;
     virtual ~Property() { owner = nullptr; }
 };
 #endif

@@ -74,6 +74,10 @@ string Brown::getName() {
     return name;
 }
 
+int Brown::getPrice() {
+    return price;
+}
+
 Brown::~Brown() {
     impTuit.clear();
 }

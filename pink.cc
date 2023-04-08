@@ -77,6 +77,10 @@ string Pink::getName() {
     return name;
 }
 
+int Pink::getPrice() {
+    return price;
+}
+
 Pink::~Pink() {
     impTuit.clear();
 }

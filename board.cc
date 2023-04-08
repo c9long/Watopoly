@@ -1,24 +1,26 @@
 #include "board.h"
-#include "brown.h"
-#include "ltblue.h"
-#include "pink.h"
-#include "orange.h"
-#include "red.h"
-#include "yellow.h"
-#include "green.h"
+
+#include <iostream>
+
 #include "blue.h"
-#include "residence.h"
-#include "gym.h"
-#include "slc.h"
-#include "needles.h"
-#include "tuition.h"
+#include "brown.h"
+#include "coopfee.h"
+#include "dctims.h"
 #include "goose.h"
 #include "gototims.h"
-#include "dctims.h"
-#include "coopfee.h"
+#include "green.h"
+#include "gym.h"
+#include "ltblue.h"
+#include "needles.h"
+#include "orange.h"
 #include "osap.h"
+#include "pink.h"
+#include "red.h"
+#include "residence.h"
+#include "slc.h"
 #include "textdisplay.h"
-#include <iostream>
+#include "tuition.h"
+#include "yellow.h"
 
 using namespace std;
 
@@ -64,10 +66,10 @@ Board::Board(vector<Player*> players) : players{players} {
     theBoard.emplace_back(new CoopFee{});
     theBoard.emplace_back(new Blue{400, "DC"});
 
-    setPropertyMap(); 
+    setPropertyMap();
 
     td = new Textdisplay{};
-    //td.notify(this);
+    // td.notify(this);
     currPlayerNum = 0;
     currPlayer = players[currPlayerNum];
 }
@@ -76,26 +78,37 @@ void Board::move(bool newRoll) {
     if (newRoll) {
         currPlayer->roll();
     }
-    currPlayer->locId = (currPlayer->locId + currPlayer->rollSum) % 40; 
+    currPlayer->locId = (currPlayer->locId + currPlayer->rollSum) % 40;
     updateTD();
     int index = currPlayer->locId;
     if (isProperty[index]) {
-        if (!owners[theBoard[index]]) {
+        Square* currProperty = theBoard[index];
+        if (!owners[currProperty]) {
             // we need a function that calculates the amount owed for the property you're on
             // makes it easier to have bankrupt in board, rather than in each property
-            cout << "You landed on an unowned property. Would you like to purchase " << theBoard[index]->getName() << "? [y/n]" << endl;
-            // input decision -> purchase or auction 
+            int propertyPrice = currProperty->getPrice();
+            cout << "You landed on an unowned property. Would you like to purchase " << currProperty->getName() << " for $" << propertyPrice << "? [y/n]" << endl;
+            // input decision -> purchase or auction
             char buying;
             cin >> buying;
-            if (buying == 'y') {
 
+            if (buying == 'y') {
+                // Check if able to pay
+                if (currPlayer->balance >= propertyPrice) {
+                    // Update player balance
+                    currPlayer->balance -= propertyPrice;
+                    addOwner(currProperty, currPlayer);
+                    cout << "You purchased " << currProperty->getName() << endl;
+                }
+            } else {
+                cout << "You did not buy this property" << endl;
             }
         } else if (owners[theBoard[index]] != currPlayer) {
             cout << "You landed on someone else's property. You owe " << owners[theBoard[index]]->getName() << " $___!" << endl;
-            // check if bankrupt, otherwise pay. 
+            // check if bankrupt, otherwise pay.
         }
     } else {
-        theBoard[index]->payOut(*currPlayer);  //can't call payOut like this because theBoard has Square*
+        theBoard[index]->payOut(*currPlayer);  // can't call payOut like this because theBoard has Square*
         // if landed on slc, need to move again, without rolling, using the changed rollSum value
         if (index == 2 || index == 17 || index == 33) {
             cout << "You landed on SLC" << endl;
@@ -117,7 +130,6 @@ void Board::next() {
 }
 
 void Board::updateTD() {
-    
 }
 
 bool Board::gameOver() {
@@ -134,8 +146,8 @@ void Board::trade(Player& other) {
     }
 
     string give, receive;
-    cin >> give; cin >> receive;
-
+    cin >> give;
+    cin >> receive;
 
     // Store amount if either trading items are money
     try {
@@ -187,20 +199,17 @@ void Board::trade(Player& other) {
 
     cin >> c;
     if (c == 'Y' || c == 'y') {
-
     } else {
-        
     }
 }
 
 bool Board::hasImprovements(string propertyName) {
-
     if (propertyMap[propertyName]->getNumImps() > 0) return true;
 
     return false;
 }
 
-vector<Player *> Board::getPlayers() {
+vector<Player*> Board::getPlayers() {
     return players;
 }
 
@@ -233,7 +242,7 @@ Square* Board::getPropertyFromMap(std::string propertyName) {
     return propertyMap[propertyName];
 }
 
-void Board::addOwner(Square * square, Player* player) {
+void Board::addOwner(Square* square, Player* player) {
     owners.emplace(square, player);
 }
 
@@ -246,7 +255,7 @@ Board::~Board() {
     delete td;
 }
 
-ostream &operator<<(std::ostream &out, const Board &b) {
+ostream& operator<<(std::ostream& out, const Board& b) {
     out << *(b.td);
     return out;
 }

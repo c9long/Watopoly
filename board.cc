@@ -67,6 +67,7 @@ Board::Board(vector<Player*> players) : players{players} {
     setPropertyMap(); 
 
     td = new Textdisplay{};
+    //td.notify(this);
     currPlayerNum = 0;
     currPlayer = players[currPlayerNum];
 }
@@ -82,7 +83,7 @@ void Board::move(bool newRoll) {
         if (!owners[theBoard[index]]) {
             // we need a function that calculates the amount owed for the property you're on
             // makes it easier to have bankrupt in board, rather than in each property
-            cout << "You landed on an unowned property. Would you like to purchase it? [y/n]" << endl;
+            cout << "You landed on an unowned property. Would you like to purchase " << theBoard[index]->name << "? [y/n]" << endl;
             // input decision -> purchase or auction 
             char buying;
             cin >> buying;
@@ -94,7 +95,7 @@ void Board::move(bool newRoll) {
             // check if bankrupt, otherwise pay. 
         }
     } else {
-        //theBoard[index]->payOut(*currPlayer);  --> can't call payOut like this because theBoard has Square*
+        theBoard[index]->payOut(*currPlayer);  //can't call payOut like this because theBoard has Square*
         // if landed on slc, need to move again, without rolling, using the changed rollSum value
         if (index == 2 || index == 17 || index == 33) {
             cout << "You landed on SLC" << endl;
@@ -109,8 +110,8 @@ void Board::move(bool newRoll) {
     // need to implement rolling doubles
 }
 
-void Board::next(int numPlayers) {
-    currPlayerNum = (currPlayerNum + 1) % numPlayers;
+void Board::next() {
+    currPlayerNum = (currPlayerNum + 1) % numPieces;
     currPlayer = players[currPlayerNum];
     cout << "Player " << currPlayerNum + 1 << " turn!" << endl;
 }

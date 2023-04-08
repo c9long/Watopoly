@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
     int numPlayers = 0;
     vector<Player *> players;
     map<char, Player *> pieces;
+    map<Player *, char> playerToChar;
     pieces['G'] = nullptr;
     pieces['B'] = nullptr;
     pieces['D'] = nullptr;
@@ -126,7 +127,7 @@ int main(int argc, char *argv[]) {
             if (cmd == "roll") {
                 b.move();
             } else if (cmd == "next") {
-                b.next(numPlayers);
+                b.next();
             } else if (cmd == "trade") {
                 
             } else if (cmd == "improve") {

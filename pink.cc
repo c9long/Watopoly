@@ -1,4 +1,5 @@
 #include "pink.h"
+using namespace std;
 
 Pink::Pink(int price, std::string name):price{price}, name{name} {
     if (name == "RCH") {

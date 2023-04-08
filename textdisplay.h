@@ -4,11 +4,9 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
 class Textdisplay
 {
-    std::vector<std::vector<string>> theBoard;
+    std::vector<std::vector<std::string>> theBoard;
 public:
     Textdisplay();
     void notify();

@@ -3,18 +3,18 @@
 #include "property.h"
 #include <string>
 #include <vector>
-using namespace std;
+
 class Blue : public Property
 {
     int price;
-    string name;
+    std::string name;
     Monopoly monopoly = Monopoly::blue;
     int impCost = 200;
     int numImps = 0;
-    vector<int> impTuit;
+    std::vector<int> impTuit;
 
 public:
-    Blue(int price, string name);
+    Blue(int price, std::string name);
     void payTuition(Player &paying, Player &earning) override;
     void addImprovement() override;
     void auction() override;

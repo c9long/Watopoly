@@ -1,5 +1,7 @@
 #include "textdisplay.h"
 
+using namespace std;
+
 Textdisplay::Textdisplay()
 {
     std::vector<string> v;

@@ -1,6 +1,7 @@
 #include "orange.h"
+using namespace std;
 
-Orange::Orange(int price, std::string name):price{price}, name{name} {
+Orange::Orange(int price, string name):price{price}, name{name} {
     if (name == "LHI") {
         impTuit.emplace_back(14);
         impTuit.emplace_back(70);

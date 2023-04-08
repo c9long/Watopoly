@@ -1,6 +1,8 @@
 #include "ltblue.h"
 
-LtBlue::LtBlue(int price, std::string name):price{price}, name{name} {
+using namespace std;
+
+LtBlue::LtBlue(int price, string name):price{price}, name{name} {
     if (name == "ECH") {
         impTuit.emplace_back(6);
         impTuit.emplace_back(30);
@@ -43,7 +45,7 @@ void LtBlue::addImprovement()
         }
         catch (...)
         {
-            std::cout << "Not enough funds to make this purchase" << std::endl;
+            cout << "Not enough funds to make this purchase" << endl;
         }
     }
 }

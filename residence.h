@@ -4,7 +4,7 @@
 class Residence : public Property
 {
     int price;
-    string name;
+    std::string name;
     Monopoly monopoly = Monopoly::residence;
     int impCost = 200;
     int numImps = 0;

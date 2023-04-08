@@ -1,6 +1,7 @@
 #include "red.h"
+using namespace std;
 
-Red::Red(int price, std::string name):price{price}, name{name} {
+Red::Red(int price, string name) : price{price}, name{name} {
     if (name == "EV1") {
         impTuit.emplace_back(18);
         impTuit.emplace_back(90);

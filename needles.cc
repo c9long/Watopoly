@@ -7,6 +7,8 @@
 #include <random>
 #include <chrono>
 
+using namespace std;
+
 Needles::Needles() {}
 
 void Needles::payOut(Player &affected) {

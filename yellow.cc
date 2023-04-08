@@ -1,6 +1,7 @@
 #include "yellow.h"
+using namespace std;
 
-Yellow::Yellow(int price, std::string name):price{price}, name{name} {
+Yellow::Yellow(int price, string name):price{price}, name{name} {
     if (name == "PHYS") {
         impTuit.emplace_back(22);
         impTuit.emplace_back(110);

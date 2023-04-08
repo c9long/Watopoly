@@ -1,6 +1,8 @@
 #include "green.h"
 
-Green::Green(int price, std::string name):price{price}, name{name} {
+using namespace std;
+
+Green::Green(int price, string name):price{price}, name{name} {
     if (name == "EIT") {
         impTuit.emplace_back(26);
         impTuit.emplace_back(130);

@@ -1,6 +1,7 @@
 #include "blue.h"
+using namespace std;
 
-Blue::Blue(int price, std::string name):price{price}, name{name} {
+Blue::Blue(int price, string name):price{price}, name{name} {
     if (name == "MC") {
         impTuit.emplace_back(35);
         impTuit.emplace_back(175);

@@ -1,6 +1,7 @@
 #include "brown.h"
+using namespace std;
 
-Brown::Brown(int price, std::string name) : price{price}, name{name}
+Brown::Brown(int price, string name) : price{price}, name{name}
 {
     if (name == "AL")
     {

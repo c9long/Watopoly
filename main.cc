@@ -35,7 +35,9 @@ int main(int argc, char *argv[]) {
                     char piece;
                     int timsCups;
                     int balance;
-                    string location;
+                    int location;
+                    int timsLinePos;
+                    int turnsInLine;
                     ifs >> name;
                     ifs >> s;
                     piece = s[0];
@@ -45,13 +47,30 @@ int main(int argc, char *argv[]) {
                     balance = stoi(s);
                     char c;
                     ifs.get(c);
-                    getline(ifs, location);
+                    // getline(ifs, location);
                     /* cout << name << endl;
                     cout << piece << endl;
                     cout << timsCups << endl;
                     cout << balance << endl; */
                     cout << location << endl;
-                    Player *p = new Player{name, balance, piece, false, 0, 0};  // needs changing
+                    Player *p;
+                    if (location == 10) {  // Player may be in DC Tims line
+                        ifs >> timsLinePos;
+                        // stringstream ss(location);
+                        // ss >> timsLinePos;
+                        if (timsLinePos > 0) {  // Player is in Tims line, otherwise at DC Tims Line but they are not in the DC Tims Line
+                            // ss >> turnsInLine;
+                            ifs >> turnsInLine;
+
+                            if (turnsInLine >= 0 && turnsInLine <= 2) {
+                                // string name, int balance, char piece, bool inJail, int numJailRolls, int locId, int numCups
+                                p = new Player{name, balance, piece, true, turnsInLine, location, timsCups};
+                            }
+                        }
+                    } else {
+                        p = new Player{name, balance, piece, false, 0, 0, timsCups};
+                    }
+
                     players.emplace_back(p);
                 }
                 Board b{players};
@@ -104,7 +123,7 @@ int main(int argc, char *argv[]) {
                 cout << "Please choose a valid/available piece" << endl;
                 cin >> piece;
             }
-            Player *p = new Player{name, 1500, piece, false, 0, 0};
+            Player *p = new Player{name, 1500, piece, false, 0, 0, 0};
             pieces[piece] = p;
             players.emplace_back(p);
         }
@@ -116,9 +135,8 @@ int main(int argc, char *argv[]) {
         while (!b.gameOver()) {
             string cmd;
             cin >> cmd;
-            while (cmd != "roll" && cmd != "next" && cmd != "trade" && cmd != "improve" && cmd != "mortgage" && cmd != "unmortgage" && cmd != "assets" && cmd != "all" && cmd != "save")
-            {
-                if (cmd == "bankrupt") { // and b.currPlayer->isBankrupt()
+            while (cmd != "roll" && cmd != "next" && cmd != "trade" && cmd != "improve" && cmd != "mortgage" && cmd != "unmortgage" && cmd != "assets" && cmd != "all" && cmd != "save") {
+                if (cmd == "bankrupt") {  // and b.currPlayer->isBankrupt()
                     // check if actually bankrupt and break
                 }
                 cout << "Please enter a valid command" << endl;
@@ -129,21 +147,13 @@ int main(int argc, char *argv[]) {
             } else if (cmd == "next") {
                 b.next();
             } else if (cmd == "trade") {
-                
             } else if (cmd == "improve") {
-                
             } else if (cmd == "mortgage") {
-                
             } else if (cmd == "unmortgage") {
-                
             } else if (cmd == "assets") {
-                
             } else if (cmd == "all") {
-                
             } else if (cmd == "save") {
-                
             } else if (cmd == "bankrupt") {
-                
             }
         }
     }

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-Player::Player(string name, int balance, char piece, bool inJail, int numJailRolls, int locId) : name{name}, balance{balance}, piece{piece}, inJail{inJail}, numJailRolls{numJailRolls}, locId{locId} {}
+Player::Player(string name, int balance, char piece, bool inJail, int numJailRolls, int locId, int numCups) : name{name}, balance{balance}, piece{piece}, inJail{inJail}, numJailRolls{numJailRolls}, locId{locId}, numCups{numCups} {}
 
 string Player::getName() {
     return name;

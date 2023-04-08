@@ -46,11 +46,12 @@ void Blue::purchase(Player &buyer)
     try
     {
         buyer.changeBalance(-price);
-        owner = &buyer;
+        owner = &buyer; // remove this when below error handled by board; remove owner field from property overall
     }
-    catch (invalid_argument& e)
+    catch (invalid_argument& ia)
     {
-        std::cout << e.what() << std::endl;
+        std::cout << ia.what() << std::endl;
+        throw; // re-raise to be handled in Board
     }
 }
 

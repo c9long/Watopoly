@@ -12,7 +12,9 @@ enum class Monopoly
     red,
     yellow,
     green,
-    blue
+    blue,
+    residence,
+    gym
 };
 
 class Property : public Square

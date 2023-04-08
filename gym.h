@@ -9,6 +9,7 @@ class Gym : public Property
     void addImprovement() override;
     void setNumImps(int num) override;
     int getNumImps() override;
+    std::string getName() override;
     virtual ~Gym() {}
 };
 #endif

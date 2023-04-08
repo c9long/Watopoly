@@ -73,6 +73,10 @@ int LtBlue::getNumImps() {
     return numImps;
 }
 
+string LtBlue::getName() {
+    return name;
+}
+
 LtBlue::~LtBlue() {
     impTuit.clear();
 }

@@ -13,6 +13,7 @@ public:
     virtual void payOut(Player &affected) = 0;
     virtual void setNumImps(int num) = 0;
     virtual int getNumImps() = 0;
+    virtual std::string getName() = 0;
     virtual ~Square() {}
 };
 #endif

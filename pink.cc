@@ -73,6 +73,10 @@ int Pink::getNumImps() {
     return numImps;
 }
 
+string Pink::getName() {
+    return name;
+}
+
 Pink::~Pink() {
     impTuit.clear();
 }

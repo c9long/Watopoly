@@ -73,6 +73,10 @@ int Orange::getNumImps() {
     return numImps;
 }
 
+string Orange::getName() {
+    return name;
+}
+
 Orange::~Orange() {
     impTuit.clear();
 }

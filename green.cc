@@ -73,6 +73,10 @@ int Green::getNumImps() {
     return numImps;
 }
 
+string Green::getName() {
+    return name;
+}
+
 Green::~Green() {
     impTuit.clear();
 }

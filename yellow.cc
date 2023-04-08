@@ -73,6 +73,10 @@ int Yellow::getNumImps() {
     return numImps;
 }
 
+string Yellow::getName() {
+    return name;
+}
+
 Yellow::~Yellow() {
     impTuit.clear();
 }

@@ -20,6 +20,7 @@ public:
     void auction() override;
     void setNumImps(int num) override;
     int getNumImps() override;
+    std::string getName() override;
     void purchase(Player &buyer) override;
     ~LtBlue();
 };

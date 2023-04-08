@@ -73,6 +73,10 @@ int Red::getNumImps() {
     return numImps;
 }
 
+string Red::getName() {
+    return name;
+}
+
 Red::~Red() {
     impTuit.clear();
 }

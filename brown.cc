@@ -70,6 +70,10 @@ int Brown::getNumImps() {
     return numImps;
 }
 
+string Brown::getName() {
+    return name;
+}
+
 Brown::~Brown() {
     impTuit.clear();
 }

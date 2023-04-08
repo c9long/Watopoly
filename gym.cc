@@ -1,4 +1,5 @@
 #include "gym.h"
+using namespace std;
 
 void Gym::purchase(Player &buyer) {
 
@@ -16,5 +17,9 @@ void Gym::addImprovement() {
 void Gym::setNumImps(int num) {} // Intentionally left blank
 
 int Gym::getNumImps() {
+    return 0;
+}
+
+string Gym::getName() {
     return 0;
 }

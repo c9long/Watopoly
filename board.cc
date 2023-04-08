@@ -83,7 +83,7 @@ void Board::move(bool newRoll) {
         if (!owners[theBoard[index]]) {
             // we need a function that calculates the amount owed for the property you're on
             // makes it easier to have bankrupt in board, rather than in each property
-            cout << "You landed on an unowned property. Would you like to purchase " << theBoard[index]->name << "? [y/n]" << endl;
+            cout << "You landed on an unowned property. Would you like to purchase " << theBoard[index]->getName() << "? [y/n]" << endl;
             // input decision -> purchase or auction 
             char buying;
             cin >> buying;
@@ -91,7 +91,7 @@ void Board::move(bool newRoll) {
 
             }
         } else if (owners[theBoard[index]] != currPlayer) {
-            cout << "You landed on someone else's property. You owe " << owners[theBoard[index]]->name << " $___!" << endl;
+            cout << "You landed on someone else's property. You owe " << owners[theBoard[index]]->getName() << " $___!" << endl;
             // check if bankrupt, otherwise pay. 
         }
     } else {

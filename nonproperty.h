@@ -13,6 +13,7 @@ public:
     virtual void payOut(Player &affected) = 0;
     void setNumImps(int num) override;
     int getNumImps() override;
+    std::string getName() override;
     virtual ~NonProperty();
 };
 #endif

@@ -181,7 +181,7 @@ int main(int argc, char *argv[]) {
                     turnsInLine = (*it)->getNumJailRolls();
 
                     outfile << playerName << " " << playerPiece << " " << playerTimsCups << " " << playerMoney << " " << playerPosition;
-                    
+
                     if (playerPosition == 10) {
                         if (inJail) {
                             outfile << " " << inJail << " " << turnsInLine;
@@ -192,7 +192,9 @@ int main(int argc, char *argv[]) {
                     outfile << endl;
                 }
 
-                string propertyNames[] = {"AL", "ML", "ECH", "PAS", "HH", "RCH", "DWE", "CPH", "LHI", "BMH", "OPT", "EV1", "EV2", "EV3", "PHYS", "B1", "B2", "EIT", "ESC", "C2", "MC", "DC"};  // arr of all properties (including residences)
+                string propertyNames[] = {"AL", "ML", "MKV", "ECH", "PAS", "HH", "RCH", "PAC", "DWE", "CPH",
+                                          "UWP", "LHI", "BMH", "OPT", "EV1", "EV2", "EV3", "V1", "PHYS", "B1",
+                                          "CIF", "B2", "EIT", "ESC", "C2", "REV", "MC", "DC"};  // arr of all properties (including residences)
                 Square *square;
                 map<Square *, Player *> ownersMap = b.getOwners();
                 Player *player;

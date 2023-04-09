@@ -137,7 +137,14 @@ int main(int argc, char *argv[]) {
             cin >> cmd;
             while (cmd != "roll" && cmd != "next" && cmd != "trade" && cmd != "improve" && cmd != "mortgage" && cmd != "unmortgage" && cmd != "assets" && cmd != "all" && cmd != "save") {
                 if (cmd == "bankrupt") {  // and b.currPlayer->isBankrupt()
-                    // check if actually bankrupt and break
+                    cout << "Are you sure you want to declare bankruptcy? (y/n)" << endl;
+                    cin >> cmd;
+                    if (cmd == "y") {
+                        // b.currPlayer->bankrupt() -> begin bankruptcy auctioning process
+                    } else {
+                        cin >> cmd;
+                        continue;
+                    }
                 }
                 cout << "Please enter a valid command" << endl;
                 cin >> cmd;

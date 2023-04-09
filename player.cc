@@ -4,6 +4,8 @@
 #include <cstdlib>
 #include <map>
 #include <string>
+#include <random>
+#include <chrono>
 
 using namespace std;
 
@@ -14,8 +16,16 @@ string Player::getName() {
 }
 
 void Player::roll() {
-    int die1 = rand() % 6 + 1;
-    int die2 = rand() % 6 + 1;
+    // use a time-based seed for the default seed value
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    default_random_engine rng{seed};
+    uniform_int_distribution<int> dist{1, 6};
+
+    int die1 = dist(rng);
+    int die2 = dist(rng);
+
+    // int die1 = rand() % 6 + 1;
+    // int die2 = rand() % 6 + 1;
 
     rollSum = die1 + die2;
     cout << "You rolled a " << die1 << " and a " << die2 << ". Moving " << die1 + die2 << " steps now." << endl;

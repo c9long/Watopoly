@@ -223,6 +223,7 @@ void Board::setPropertyMap() {
     propertyMap["PAS"] = theBoard.at(8);
     propertyMap["HH"] = theBoard.at(9);
     propertyMap["RCH"] = theBoard.at(11);
+    propertyMap["PAC"] = theBoard.at(12);
     propertyMap["DWE"] = theBoard.at(13);
     propertyMap["CPH"] = theBoard.at(14);
     propertyMap["UWP"] = theBoard.at(15);
@@ -235,6 +236,7 @@ void Board::setPropertyMap() {
     propertyMap["V1"] = theBoard.at(25);
     propertyMap["PHYS"] = theBoard.at(26);
     propertyMap["B1"] = theBoard.at(27);
+    propertyMap["CIF"] = theBoard.at(28);
     propertyMap["B2"] = theBoard.at(29);
     propertyMap["EIT"] = theBoard.at(31);
     propertyMap["ESC"] = theBoard.at(32);
@@ -246,6 +248,10 @@ void Board::setPropertyMap() {
 
 Square* Board::getPropertyFromMap(std::string propertyName) {
     return propertyMap[propertyName];
+}
+
+std::map<Square *, Player *> Board::getOwners() {
+    return owners;
 }
 
 void Board::addOwner(Square* square, Player* player) {

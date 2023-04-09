@@ -127,9 +127,11 @@ void Board::next() {
     currPlayerNum = (currPlayerNum + 1) % numPieces;
     currPlayer = players[currPlayerNum];
     cout << "Player " << currPlayerNum + 1 << " turn!" << endl;
+    // this->updateTD();
 }
 
 void Board::updateTD() {
+    td->notify();
 }
 
 bool Board::gameOver() {
@@ -193,7 +195,7 @@ void Board::trade(Player& other) {
         throw invalid_argument("You do not have enough money to do this trade!");
     }
 
-    cout << other.name << ", would you like to accept this trade? (Y/N)" << endl;
+    cout << other.name << ", would you like to accept this trade? (y/n)" << endl;
 
     char c;
 

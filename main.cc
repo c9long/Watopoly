@@ -186,6 +186,17 @@ int main(int argc, char *argv[])
             }
             else if (cmd == "trade")
             {
+                string name;
+                cin >> name;
+                for (auto it = players.begin(); it != players.end(); ++it) {
+                    if ((*it)->getName() == name) {
+                        try {
+                            b.trade(**it);
+                        } catch (invalid_argument& ia) {
+                            cout << ia.what() << endl;
+                        }
+                    }
+                }
             }
             else if (cmd == "improve")
             {

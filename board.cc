@@ -216,30 +216,40 @@ vector<Player*> Board::getPlayers() {
 void Board::setPropertyMap() {
     propertyMap["AL"] = theBoard.at(1);
     propertyMap["ML"] = theBoard.at(3);
+    propertyMap["MKV"] = theBoard.at(5);
     propertyMap["ECH"] = theBoard.at(6);
     propertyMap["PAS"] = theBoard.at(8);
     propertyMap["HH"] = theBoard.at(9);
     propertyMap["RCH"] = theBoard.at(11);
+    propertyMap["PAC"] = theBoard.at(12);
     propertyMap["DWE"] = theBoard.at(13);
     propertyMap["CPH"] = theBoard.at(14);
+    propertyMap["UWP"] = theBoard.at(15);
     propertyMap["LHI"] = theBoard.at(16);
     propertyMap["BMH"] = theBoard.at(18);
     propertyMap["OPT"] = theBoard.at(19);
     propertyMap["EV1"] = theBoard.at(21);
     propertyMap["EV2"] = theBoard.at(23);
     propertyMap["EV3"] = theBoard.at(24);
+    propertyMap["V1"] = theBoard.at(25);
     propertyMap["PHYS"] = theBoard.at(26);
     propertyMap["B1"] = theBoard.at(27);
+    propertyMap["CIF"] = theBoard.at(28);
     propertyMap["B2"] = theBoard.at(29);
     propertyMap["EIT"] = theBoard.at(31);
     propertyMap["ESC"] = theBoard.at(32);
     propertyMap["C2"] = theBoard.at(34);
+    propertyMap["REV"] = theBoard.at(35);
     propertyMap["MC"] = theBoard.at(37);
     propertyMap["DC"] = theBoard.at(39);
 }
 
 Square* Board::getPropertyFromMap(std::string propertyName) {
     return propertyMap[propertyName];
+}
+
+std::map<Square *, Player *> Board::getOwners() {
+    return owners;
 }
 
 void Board::addOwner(Square* square, Player* player) {

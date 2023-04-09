@@ -32,6 +32,7 @@ public:
     std::vector<Player *> getPlayers(); // Getter for players vector
     void setPropertyMap(); // implemented
     Square* getPropertyFromMap(std::string propertyName);
+    std::map<Square *, Player *> getOwners();
     void updateTD();
     void addOwner(Square * square, Player* player);
 

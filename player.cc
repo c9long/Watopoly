@@ -1,9 +1,11 @@
 #include "player.h"
-#include "square.h"
-#include <iostream>
+
 #include <cstdlib>
+#include <iostream>
 #include <map>
 #include <string>
+
+#include "square.h"
 
 using namespace std;
 
@@ -11,6 +13,27 @@ Player::Player(string name, int balance, char piece, bool inJail, int numJailRol
 
 string Player::getName() {
     return name;
+}
+
+char Player::getPiece() {
+    return piece;
+}
+
+int Player::getBalance() {
+    return balance;
+}
+
+bool Player::getInJail() {
+    return inJail;
+}
+int Player::getNumJailRolls() {
+    return numJailRolls;
+}
+int Player::getLocId() {
+    return locId;
+}
+int Player::getNumCups() {
+    return numCups;
 }
 
 void Player::roll() {

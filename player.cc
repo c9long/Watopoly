@@ -13,32 +13,40 @@ using namespace std;
 
 Player::Player(string name, int balance, char piece, bool inJail, int numJailRolls, int locId, int numCups) : name{name}, balance{balance}, piece{piece}, inJail{inJail}, numJailRolls{numJailRolls}, locId{locId}, numCups{numCups} {}
 
-string Player::getName() {
+string Player::getName()
+{
     return name;
 }
 
-char Player::getPiece() {
+char Player::getPiece()
+{
     return piece;
 }
 
-int Player::getBalance() {
+int Player::getBalance()
+{
     return balance;
 }
 
-bool Player::getInJail() {
+bool Player::getInJail()
+{
     return inJail;
 }
-int Player::getNumJailRolls() {
+int Player::getNumJailRolls()
+{
     return numJailRolls;
 }
-int Player::getLocId() {
+int Player::getLocId()
+{
     return locId;
 }
-int Player::getNumCups() {
+int Player::getNumCups()
+{
     return numCups;
 }
 
-void Player::roll() {
+void Player::roll()
+{
     // use a time-based seed for the default seed value
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     default_random_engine rng{seed};
@@ -56,7 +64,17 @@ void Player::roll() {
 
 void Player::next() {}
 
-void Player::changeBalance(int x) {
-    if (balance + x < 0) throw invalid_argument("You do not have enough funds to make this purchase");
+void Player::changeBalance(int x)
+{
+    if (balance + x < 0)
+        throw invalid_argument("You do not have enough funds to make this purchase");
     balance += x;
+}
+
+void Player::setLocId(int loc) {
+    locId = loc;
+}
+
+void Player::toggleInJail() {
+    inJail = !inJail;
 }

@@ -23,7 +23,7 @@ protected:
     
     // bool trade(std::string name, std::string give, std::string receive);
 
-   public:
+public:
     Player(std::string name, int balance, char piece, bool inJail, int numJailRolls, int locId, int numCups);
     std::string getName();
     char getPiece();
@@ -32,6 +32,10 @@ protected:
     int getNumJailRolls();
     int getLocId();
     int getNumCups();
+    
+    void setLocId(int loc);
+    void toggleInJail();
+
     void changeBalance(int x);  // cannot make properties friends for error checking
     bool trade(Player& other, std::string give, std::string receive);
     friend class Board;

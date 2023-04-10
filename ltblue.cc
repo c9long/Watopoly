@@ -43,9 +43,9 @@ void LtBlue::addImprovement(Player* owner)
             owner->changeBalance(-impCost);
             ++numImps;
         }
-        catch (...)
+        catch (invalid_argument& ia)
         {
-            cout << "Not enough funds to make this purchase" << endl;
+            std::cout << ia.what() << std::endl;
         }
     }
 }

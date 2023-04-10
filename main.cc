@@ -181,145 +181,147 @@ int main(int argc, char *argv[])
             pieces[piece] = p;
             players.emplace_back(p);
         }
-        Board b{players, numPlayers};
-        // b.numPieces = numPlayers;
-        //cout << b;
+    }
+    Board b{players, numPlayers};
+    // b.numPieces = numPlayers;
+    // cout << b;
 
-        cout << "Player " << b.currPlayerNum + 1 << " turn!" << endl;
-        // while game hasn't ended
-        while (!b.gameOver())
+    cout << "Player " << b.currPlayerNum + 1 << " turn!" << endl;
+    // while game hasn't ended
+    while (!b.gameOver())
+    {
+        string cmd;
+        cin >> cmd;
+        while (cmd != "roll" && cmd != "next" && cmd != "trade" && cmd != "improve" && cmd != "mortgage" && cmd != "unmortgage" && cmd != "assets" && cmd != "all" && cmd != "save" && cmd != "bankrupt")
         {
-            string cmd;
+            if (cin.eof())
+                break;
+            cout << "Please enter a valid command" << endl;
             cin >> cmd;
-            while (cmd != "roll" && cmd != "next" && cmd != "trade" && cmd != "improve" && cmd != "mortgage" && cmd != "unmortgage" && cmd != "assets" && cmd != "all" && cmd != "save" && cmd != "bankrupt")
+        }
+        if (cmd == "bankrupt")
+        { // and b.currPlayer->isBankrupt()
+            cout << "Are you sure you want to declare bankruptcy? (y/n)" << endl;
+            cin >> cmd;
+            if (cmd == "y")
             {
-                if (cin.eof()) break;
-                cout << "Please enter a valid command" << endl;
+                // b.currPlayer->bankrupt() -> begin bankruptcy auctioning process
+            }
+            else
+            {
                 cin >> cmd;
+                continue;
             }
-            if (cmd == "bankrupt")
-            { // and b.currPlayer->isBankrupt()
-                cout << "Are you sure you want to declare bankruptcy? (y/n)" << endl;
-                cin >> cmd;
-                if (cmd == "y")
-                {
-                    // b.currPlayer->bankrupt() -> begin bankruptcy auctioning process
-                }
-                else
-                {
-                    cin >> cmd;
-                    continue;
-                }
-            }
-            else if (cmd == "roll")
+        }
+        else if (cmd == "roll")
+        {
+            b.move();
+        }
+        else if (cmd == "next")
+        {
+            b.next();
+        }
+        else if (cmd == "trade")
+        {
+            string name;
+            cin >> name;
+            for (auto it = players.begin(); it != players.end(); ++it)
             {
-                b.move();
-            } 
-            else if (cmd == "next") {
-                b.next();
-            }
-            else if (cmd == "trade")
-            {
-                string name;
-                cin >> name;
-                for (auto it = players.begin(); it != players.end(); ++it)
+                if ((*it)->getName() == name)
                 {
-                    if ((*it)->getName() == name)
+                    try
                     {
-                        try
-                        {
-                            b.trade(**it);
-                        }
-                        catch (invalid_argument &ia)
-                        {
-                            cout << ia.what() << endl;
-                        }
+                        b.trade(**it);
+                    }
+                    catch (invalid_argument &ia)
+                    {
+                        cout << ia.what() << endl;
                     }
                 }
             }
-            else if (cmd == "improve")
-            {
-            }
-            else if (cmd == "mortgage")
-            {
-            }
-            else if (cmd == "unmortgage")
-            {
-            }
-            else if (cmd == "assets")
-            {
-            }
-            else if (cmd == "all")
-            {
-            }
-            else if (cmd == "save")
-            {
-                string fileName;
-                cin >> fileName;
-                ofstream outfile{fileName + ".txt"};
+        }
+        else if (cmd == "improve")
+        {
+        }
+        else if (cmd == "mortgage")
+        {
+        }
+        else if (cmd == "unmortgage")
+        {
+        }
+        else if (cmd == "assets")
+        {
+        }
+        else if (cmd == "all")
+        {
+        }
+        else if (cmd == "save")
+        {
+            string fileName;
+            cin >> fileName;
+            ofstream outfile{fileName + ".txt"};
 
-                outfile << b.getPlayers().size() << endl; // Save num players
+            outfile << b.getPlayers().size() << endl; // Save num players
 
-                // player char TimsCups money position -- normal
-                // player char TimsCups money 10 0 -- at DC not in jail
-                // player char TimsCups money 10 1 num -- in jail
-                string playerName;
-                char playerPiece;
-                int playerTimsCups;
-                int playerMoney;
-                int playerPosition;
-                int inJail; // Stored as bool in player, but needs to be int when written in file
-                int turnsInLine;
+            // player char TimsCups money position -- normal
+            // player char TimsCups money 10 0 -- at DC not in jail
+            // player char TimsCups money 10 1 num -- in jail
+            string playerName;
+            char playerPiece;
+            int playerTimsCups;
+            int playerMoney;
+            int playerPosition;
+            int inJail; // Stored as bool in player, but needs to be int when written in file
+            int turnsInLine;
 
-                for (auto it = b.getPlayers().begin(); it != b.getPlayers().end(); ++it)
-                {                                     // loop through players vec
-                    cout << (*it)->getName() << endl; // remove later
-                    playerName = (*it)->getName();
-                    playerPiece = (*it)->getPiece();
-                    playerTimsCups = (*it)->getNumCups();
-                    playerMoney = (*it)->getBalance();
-                    playerPosition = (*it)->getLocId();
-                    inJail = (*it)->getInJail();
-                    turnsInLine = (*it)->getNumJailRolls();
+            for (auto it = b.getPlayers().begin(); it != b.getPlayers().end(); ++it)
+            {                                     // loop through players vec
+                cout << (*it)->getName() << endl; // remove later
+                playerName = (*it)->getName();
+                playerPiece = (*it)->getPiece();
+                playerTimsCups = (*it)->getNumCups();
+                playerMoney = (*it)->getBalance();
+                playerPosition = (*it)->getLocId();
+                inJail = (*it)->getInJail();
+                turnsInLine = (*it)->getNumJailRolls();
 
-                    outfile << playerName << " " << playerPiece << " " << playerTimsCups << " " << playerMoney << " " << playerPosition;
+                outfile << playerName << " " << playerPiece << " " << playerTimsCups << " " << playerMoney << " " << playerPosition;
 
-                    if (playerPosition == 10)
-                    {
-                        if (inJail)
-                        {
-                            outfile << " " << inJail << " " << turnsInLine;
-                        }
-                        else
-                        {
-                            outfile << " " << inJail;
-                        }
-                    }
-                    outfile << endl;
-                }
-
-                string propertyNames[] = {"AL", "ML", "MKV", "ECH", "PAS", "HH", "RCH", "PAC", "DWE", "CPH",
-                                          "UWP", "LHI", "BMH", "OPT", "EV1", "EV2", "EV3", "V1", "PHYS", "B1",
-                                          "CIF", "B2", "EIT", "ESC", "C2", "REV", "MC", "DC"}; // arr of all properties (including residences)
-                Square *square;
-                map<Square *, Player *> ownersMap = b.getOwners();
-                Player *player;
-                int improvements;
-                for (int i = 0; i < sizeof(propertyNames) / sizeof(propertyNames[0]); i++)
+                if (playerPosition == 10)
                 {
-                    square = b.getPropertyFromMap(propertyNames[i]);
-                    player = nullptr;
-                    improvements = 0;
-
-                    if (ownersMap.count(square) > 0)
-                    { // Property  has owner
-                        improvements = square->getNumImps();
-                        outfile << square->getName() << " " << player->getName() << " " << improvements << endl; // format: AL owner improvements -- buildings
+                    if (inJail)
+                    {
+                        outfile << " " << inJail << " " << turnsInLine;
                     }
                     else
-                    { // BANK owns property
-                        outfile << square->getName() << " BANK " << improvements << endl;
+                    {
+                        outfile << " " << inJail;
                     }
+                }
+                outfile << endl;
+            }
+
+            string propertyNames[] = {"AL", "ML", "MKV", "ECH", "PAS", "HH", "RCH", "PAC", "DWE", "CPH",
+                                      "UWP", "LHI", "BMH", "OPT", "EV1", "EV2", "EV3", "V1", "PHYS", "B1",
+                                      "CIF", "B2", "EIT", "ESC", "C2", "REV", "MC", "DC"}; // arr of all properties (including residences)
+            Square *square;
+            map<Square *, Player *> ownersMap = b.getOwners();
+            Player *player;
+            int improvements;
+            for (int i = 0; i < sizeof(propertyNames) / sizeof(propertyNames[0]); i++)
+            {
+                square = b.getPropertyFromMap(propertyNames[i]);
+                player = nullptr;
+                improvements = 0;
+
+                if (ownersMap.count(square) > 0)
+                { // Property  has owner
+                    improvements = square->getNumImps();
+                    outfile << square->getName() << " " << player->getName() << " " << improvements << endl; // format: AL owner improvements -- buildings
+                }
+                else
+                { // BANK owns property
+                    outfile << square->getName() << " BANK " << improvements << endl;
                 }
             }
         }

@@ -4,13 +4,12 @@
 #include <string>
 
 #include "board.h"
-#include "square.h" // can be changed to forward declaration
+#include "square.h"  // can be changed to forward declaration
 #include "textdisplay.h"
 
 using namespace std;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     int numPlayers = 0;
     vector<Player *> players;
     map<char, Player *> pieces;
@@ -24,90 +23,104 @@ int main(int argc, char *argv[])
     pieces['L'] = nullptr;
     pieces['T'] = nullptr;
 
-    if (argc > 1)
-    {
+    if (argc > 1) {
         string arg = argv[1];
-        if (arg == "-load")
-        {
+        if (arg == "-load") {
             ifstream ifs{argv[2]};
             string s;
-            if (ifs >> s)
-            {
+            if (ifs >> s) {
                 numPlayers = stoi(s);
-                for (int i = 0; i < numPlayers; ++i)
-                {
-                    string name;
-                    char piece;
-                    int timsCups;
-                    int balance;
-                    int location;
-                    int timsLinePos;
-                    int turnsInLine;
+                for (int i = 0; i < numPlayers; ++i) {
+                    string name = "";
+                    char piece = '\0';
+                    int timsCups = 0;
+                    int balance = 0;
+                    int location = 0;
+                    int timsLinePos = 0;
+                    int turnsInLine = 0;
                     ifs >> name;
+                    cout << "Name " << name << endl;
                     ifs >> s;
                     piece = s[0];
+                    cout << "Piece " << piece << endl;  // good
                     ifs >> s;
-                    timsCups = stoi(s);
+                    // cout << "s is nwo " << s << endl;
+                    // timsCups = stoi(s);
+                    try {
+                        timsCups = stoi(s);
+                    } catch (const std::invalid_argument &e) {
+                        // handle the error
+                        cout << "can't convert " << s << " using stoi !!" << endl;
+                    }
                     ifs >> s;
                     balance = stoi(s);
+                    cout << "balance is " << balance << endl;
                     char c;
+                    ifs.get(c);
                     ifs.get(c);
                     // getline(ifs, location);
                     /* cout << name << endl;
                     cout << piece << endl;
                     cout << timsCups << endl;
                     cout << balance << endl; */
-                    cout << location << endl;
+                    cout << "location " << location << endl;
                     Player *p;
-                    if (location == 10)
-                    { // Player may be in DC Tims line
+                    if (location == 10) {  // Player may be in DC Tims line
+                        cout << "player position at 10 " << endl;
                         ifs >> timsLinePos;
                         // stringstream ss(location);
                         // ss >> timsLinePos;
-                        if (timsLinePos > 0)
-                        { // Player is in Tims line, otherwise at DC Tims Line but they are not in the DC Tims Line
+                        if (timsLinePos > 0) {  // Player is in Tims line, otherwise at DC Tims Line but they are not in the DC Tims Line
                             // ss >> turnsInLine;
                             ifs >> turnsInLine;
 
-                            if (turnsInLine >= 0 && turnsInLine <= 2)
-                            {
+                            if (turnsInLine >= 0 && turnsInLine <= 2) {
                                 // string name, int balance, char piece, bool inJail, int numJailRolls, int locId, int numCups
                                 p = new Player{name, balance, piece, true, turnsInLine, location, timsCups};
                             }
                         }
-                    }
-                    else
-                    {
+                    } else {
                         p = new Player{name, balance, piece, false, 0, 0, timsCups};
                     }
 
                     players.emplace_back(p);
+                    cout << "PLAYER PLACED BACK" << endl;
                 }
                 Board b{players};
 
                 // Set each property and its owner and improvements
+                // ifs >> s;
+                // cout << "ahhh" << s << endl;
+                char c;
+                ifs.get(c);
                 string currLine;
-                while (getline(ifs, currLine))
-                {
+                while (getline(ifs, currLine)) {
+                    cout << "INSIDE WHILE HERE " << endl;
                     stringstream ss(currLine);
-                    string property;
-                    string ownerName;
-                    string tmpImpsStr;
-                    int numImps;
+                    string property = "";
+                    string ownerName = "";
+                    string tmpImpsStr = "";
+                    int numImps = 0;
+
+                    // cout << "-----------" << currLine << endl;
 
                     ss >> property >> ownerName >> tmpImpsStr;
+                    // ss >> property;
+                    // cout << "property:"  << property << endl;
+                    // ss >> ownerName;
+                    // ss >> tmpImpsStr;
+                    cout << "Send help " << property << " " << ownerName << " " << tmpImpsStr << endl;
                     numImps = stoi(tmpImpsStr);
+
+                    // cout << "after numImps " << endl;
 
                     Square *square = b.getPropertyFromMap(property);
                     Player *owner = nullptr;
 
                     // Find player from player vector and set owner to Player
-                    if (ownerName != "BANK")
-                    {
-                        for (auto p : b.getPlayers())
-                        {
-                            if (ownerName == p->getName())
-                            {
+                    if (ownerName != "BANK") {
+                        for (auto p : b.getPlayers()) {
+                            if (ownerName == p->getName()) {
                                 owner = p;
                                 break;
                             }
@@ -118,20 +131,14 @@ int main(int argc, char *argv[])
                     square->setNumImps(numImps);
                 }
             }
+        } else if (arg == "testing") {
         }
-        else if (arg == "testing")
-        {
-        }
-    }
-    else
-    {
-        while (numPlayers < 2 || numPlayers > 6)
-        {
+    } else {
+        while (numPlayers < 2 || numPlayers > 6) {
             cout << "How many players would you like to enter into your new game?" << endl;
             cin >> numPlayers;
         }
-        for (int i = 0; i < numPlayers; ++i)
-        {
+        for (int i = 0; i < numPlayers; ++i) {
             cout << "Enter Player " << i + 1 << "'s name" << endl;
             string name;
             cin >> name;
@@ -139,8 +146,7 @@ int main(int argc, char *argv[])
             cout << "Select your piece (G, B, D, P, S, $, L, or T)" << endl;
             char piece;
             cin >> piece;
-            while ((piece != 'G' && piece != 'B' && piece != 'D' && piece != 'P' && piece != 'S' && piece != '$' && piece != 'L' && piece != 'T') || pieces[piece])
-            {
+            while ((piece != 'G' && piece != 'B' && piece != 'D' && piece != 'P' && piece != 'S' && piece != '$' && piece != 'L' && piece != 'T') || pieces[piece]) {
                 cout << "Please choose a valid/available piece" << endl;
                 cin >> piece;
             }
@@ -153,35 +159,25 @@ int main(int argc, char *argv[])
 
         cout << "Player " << b.currPlayerNum + 1 << " turn!" << endl;
         // while game hasn't ended
-        while (!b.gameOver())
-        {
+        while (!b.gameOver()) {
             string cmd;
             cin >> cmd;
-            while (cmd != "roll" && cmd != "next" && cmd != "trade" && cmd != "improve" && cmd != "mortgage" && cmd != "unmortgage" && cmd != "assets" && cmd != "all" && cmd != "save" && cmd != "bankrupt")
-            {
+            while (cmd != "roll" && cmd != "next" && cmd != "trade" && cmd != "improve" && cmd != "mortgage" && cmd != "unmortgage" && cmd != "assets" && cmd != "all" && cmd != "save" && cmd != "bankrupt") {
                 cout << "Please enter a valid command" << endl;
                 cin >> cmd;
             }
-            if (cmd == "bankrupt")
-            { // and b.currPlayer->isBankrupt()
+            if (cmd == "bankrupt") {  // and b.currPlayer->isBankrupt()
                 cout << "Are you sure you want to declare bankruptcy? (y/n)" << endl;
                 cin >> cmd;
-                if (cmd == "y")
-                {
+                if (cmd == "y") {
                     // b.currPlayer->bankrupt() -> begin bankruptcy auctioning process
-                }
-                else
-                {
+                } else {
                     cin >> cmd;
                     continue;
                 }
-            }
-            else if (cmd == "roll")
-            {
+            } else if (cmd == "roll") {
                 b.move();
-            }
-            else if (cmd == "next")
-            {
+            } else if (cmd == "next") {
                 b.next();
             } else if (cmd == "trade") {
             } else if (cmd == "improve") {
@@ -250,38 +246,24 @@ int main(int argc, char *argv[])
                 }
 
             } else if (cmd == "bankrupt") {
-            }
-            else if (cmd == "trade")
-            {
+            } else if (cmd == "trade") {
                 string name;
                 cin >> name;
                 for (auto it = players.begin(); it != players.end(); ++it) {
                     if ((*it)->getName() == name) {
                         try {
                             b.trade(**it);
-                        } catch (invalid_argument& ia) {
+                        } catch (invalid_argument &ia) {
                             cout << ia.what() << endl;
                         }
                     }
                 }
-            }
-            else if (cmd == "improve")
-            {
-            }
-            else if (cmd == "mortgage")
-            {
-            }
-            else if (cmd == "unmortgage")
-            {
-            }
-            else if (cmd == "assets")
-            {
-            }
-            else if (cmd == "all")
-            {
-            }
-            else if (cmd == "save")
-            {
+            } else if (cmd == "improve") {
+            } else if (cmd == "mortgage") {
+            } else if (cmd == "unmortgage") {
+            } else if (cmd == "assets") {
+            } else if (cmd == "all") {
+            } else if (cmd == "save") {
             }
         }
     }

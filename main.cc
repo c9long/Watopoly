@@ -39,22 +39,34 @@ int main(int argc, char *argv[]) {
                     int timsLinePos = 0;
                     int turnsInLine = 0;
                     ifs >> name;
+                    cout << "Name " << name << endl;
                     ifs >> s;
                     piece = s[0];
+                    cout << "Piece " << piece << endl;  // good
                     ifs >> s;
-                    timsCups = stoi(s);
+                    // cout << "s is nwo " << s << endl;
+                    // timsCups = stoi(s);
+                    try {
+                        timsCups = stoi(s);
+                    } catch (const std::invalid_argument &e) {
+                        // handle the error
+                        cout << "can't convert " << s << " using stoi !!" << endl;
+                    }
                     ifs >> s;
                     balance = stoi(s);
+                    cout << "balance is " << balance << endl;
                     char c;
+                    ifs.get(c);
                     ifs.get(c);
                     // getline(ifs, location);
                     /* cout << name << endl;
                     cout << piece << endl;
                     cout << timsCups << endl;
                     cout << balance << endl; */
-                    cout << location << endl;
+                    cout << "location " << location << endl;
                     Player *p;
                     if (location == 10) {  // Player may be in DC Tims line
+                        cout << "player position at 10 " << endl;
                         ifs >> timsLinePos;
                         // stringstream ss(location);
                         // ss >> timsLinePos;
@@ -72,20 +84,35 @@ int main(int argc, char *argv[]) {
                     }
 
                     players.emplace_back(p);
+                    cout << "PLAYER PLACED BACK" << endl;
                 }
                 Board b{players};
 
                 // Set each property and its owner and improvements
+                // ifs >> s;
+                // cout << "ahhh" << s << endl;
+                char c;
+                ifs.get(c);
                 string currLine;
                 while (getline(ifs, currLine)) {
+                    cout << "INSIDE WHILE HERE " << endl;
                     stringstream ss(currLine);
-                    string property;
-                    string ownerName;
-                    string tmpImpsStr;
-                    int numImps;
+                    string property = "";
+                    string ownerName = "";
+                    string tmpImpsStr = "";
+                    int numImps = 0;
+
+                    // cout << "-----------" << currLine << endl;
 
                     ss >> property >> ownerName >> tmpImpsStr;
+                    // ss >> property;
+                    // cout << "property:"  << property << endl;
+                    // ss >> ownerName;
+                    // ss >> tmpImpsStr;
+                    cout << "Send help " << property << " " << ownerName << " " << tmpImpsStr << endl;
                     numImps = stoi(tmpImpsStr);
+
+                    // cout << "after numImps " << endl;
 
                     Square *square = b.getPropertyFromMap(property);
                     Player *owner = nullptr;

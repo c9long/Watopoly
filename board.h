@@ -24,7 +24,7 @@ public:
     Player *currPlayer = nullptr;
     int currPlayerNum;
     int numPieces; // same thing as numPlayers in main but don't want to double on variable names
-    Board(std::vector<Player*> players); // implemented
+    Board(std::vector<Player*> players, int numPlayers); // implemented
     bool gameOver();
     void move(bool newRoll = true);
     void next();

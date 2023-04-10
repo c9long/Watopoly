@@ -458,9 +458,12 @@ std::ostream &operator<<(std::ostream &out, const Textdisplay &td)
 void Textdisplay::notify(Board &whoNotified) {
     if (whoNotified.currPlayer == nullptr) {
         // setting up all pieces at the beginning of the game
-        cout << "whoNotified was a nullptr" << endl;
+        cout << "whoNotified was a nullptr, numpieces = " << whoNotified.numPieces << endl;
+        int newLoc = convertLoc[0];
         for (int i = 0; i < whoNotified.numPieces; i++) {
-
+            int spot = i; // which of the 7 spots the character gets placed
+            cout << "current piece at begginning " << whoNotified.getPlayers()[i]->getPiece() << endl;
+            theBoard[newLoc][3][spot] = whoNotified.getPlayers()[i]->getPiece();
         }
     } else {
         // moving one player's piece after a move
@@ -471,8 +474,8 @@ void Textdisplay::notify(Board &whoNotified) {
         int spot = whoNotified.currPlayer->getPlayerNum();
         theBoard[oldLoc][3][spot] = ' ';
         theBoard[newLoc][3][spot] = whoNotified.currPlayer->getPiece();
-        cout << *this;
     }
+    cout << *this;
 } 
 
 Textdisplay::~Textdisplay() {

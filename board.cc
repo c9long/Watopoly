@@ -24,7 +24,7 @@
 
 using namespace std;
 
-Board::Board(vector<Player*> players) : players{players} {
+Board::Board(vector<Player*> players, int numPlayers) : players{players}, numPieces{numPlayers} {
     theBoard.emplace_back(new OSAP{});
     theBoard.emplace_back(new Brown{40, "AL"});
     theBoard.emplace_back(new SLC{});
@@ -69,7 +69,7 @@ Board::Board(vector<Player*> players) : players{players} {
     setPropertyMap();
 
     td = new Textdisplay{};
-    // td->notify(*this);
+    td->notify(*this);
     currPlayerNum = 0;
     currPlayer = players[currPlayerNum];
 }

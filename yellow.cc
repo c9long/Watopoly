@@ -32,7 +32,7 @@ void Yellow::payTuition(Player &paying, Player &earning)
     earning.changeBalance(impTuit.at(numImps));
 }
 
-void Yellow::addImprovement()
+void Yellow::addImprovement(Player* owner)
 {
     // potentially need to pass in purchasing player to change balance
     if (numImps < 5)
@@ -54,7 +54,6 @@ void Yellow::purchase(Player &buyer)
     try
     {
         buyer.changeBalance(-price);
-        owner = &buyer; // remove this when below error handled by board; remove owner field from property overall
     }
     catch (invalid_argument& ia)
     {

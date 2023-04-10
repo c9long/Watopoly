@@ -104,9 +104,15 @@ void Board::move(bool newRoll)
                 if (currPlayer->balance >= propertyPrice)
                 {
                     // Update player balance
-                    currProperty->purchase(*currPlayer);
-                    addOwner(currProperty, currPlayer);
-                    cout << "You purchased " << currProperty->getName() << ". Your new balance is $" << currPlayer->balance << endl;
+                    try
+                    {
+                        currProperty->purchase(*currPlayer);
+                        addOwner(currProperty, currPlayer);
+                        cout << "You purchased " << currProperty->getName() << ". Your new balance is $" << currPlayer->balance << endl;
+                    }
+                    catch (invalid_argument &)
+                    {
+                    }
                 }
             }
             else
@@ -319,7 +325,7 @@ void Board::addOwner(Square *square, Player *player)
     owners[square] = player;
 }
 
-void Board::auction(Square* property)
+void Board::auction(Square *property)
 {
     /* cout << "You did not buy this property" << endl;  change to auction */
     vector<bool> inAuction;
@@ -391,7 +397,8 @@ void Board::auction(Square* property)
                     cout << "You have withdrawn from this auction." << endl;
                     --numParticipants;
                     inAuction.at(i) = !inAuction.at(i);
-                    if (numParticipants == 1) break;
+                    if (numParticipants == 1)
+                        break;
                 }
             }
         }

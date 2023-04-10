@@ -32,7 +32,7 @@ void Orange::payTuition(Player &paying, Player &earning)
     earning.changeBalance(impTuit.at(numImps));
 }
 
-void Orange::addImprovement()
+void Orange::addImprovement(Player* owner)
 {
     // potentially need to pass in purchasing player to change balance
     if (numImps < 5)
@@ -42,9 +42,9 @@ void Orange::addImprovement()
             owner->changeBalance(-impCost);
             ++numImps;
         }
-        catch (...)
+        catch (invalid_argument& ia)
         {
-            std::cout << "Not enough funds to make this purchase" << std::endl;
+            std::cout << ia.what() << std::endl;
         }
     }
 }
@@ -54,7 +54,6 @@ void Orange::purchase(Player &buyer)
     try
     {
         buyer.changeBalance(-price);
-        owner = &buyer; // remove this when below error handled by board; remove owner field from property overall
     }
     catch (invalid_argument& ia)
     {

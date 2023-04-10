@@ -13,7 +13,7 @@ public:
     void purchase(Player &buyer) override;
     void auction(int amount) override;
     void payTuition(Player &paying, Player &earning) override;
-    void addImprovement() override;
+    void addImprovement(Player* owner) override;
     void setNumImps(int num) override;
     int getNumImps() override;
     std::string getName() override;

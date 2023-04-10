@@ -4,7 +4,7 @@ using namespace std;
 void NonProperty::purchase(Player &buyer) {}
 void NonProperty::auction(int amount) {}
 void NonProperty::payTuition(Player &paying, Player &earning) {}
-void NonProperty::addImprovement() {}
+void NonProperty::addImprovement(Player* owner) {}
 int NonProperty::getNumImps() { return 0; }
 void NonProperty::setNumImps(int num) {}
 string NonProperty::getName() { return 0; }

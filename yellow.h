@@ -16,7 +16,7 @@ class Yellow : public Property
 public:
     Yellow(int price, std::string name);
     void payTuition(Player &paying, Player &earning) override;
-    void addImprovement() override;
+    void addImprovement(Player* owner) override;
     void auction(int amount) override;
     void setNumImps(int num) override;
     int getNumImps() override;

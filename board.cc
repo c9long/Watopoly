@@ -75,6 +75,15 @@ Board::Board(vector<Player *> players, int numPlayers) : players{players}, numPi
     currPlayer = players[currPlayerNum];
 }
 
+void Board::improve(string name) {
+    Square* prop = propertyMap[name];
+    if (owners[prop] == currPlayer) {
+        prop->addImprovement(currPlayer);
+    } else {
+        cout << "You cannot improve a property you don't own" << endl;
+    }
+}
+
 void Board::move(bool newRoll)
 {
     if (newRoll)

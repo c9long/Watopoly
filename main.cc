@@ -242,6 +242,10 @@ int main(int argc, char *argv[])
         }
         else if (cmd == "improve")
         {
+            cout << "Enter the name of the property you would like to improve" << endl;
+            string name;
+            cin >> name;
+            b.improve(name);
         }
         else if (cmd == "mortgage")
         {

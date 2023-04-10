@@ -152,7 +152,6 @@ void Board::move(bool newRoll)
     }
     else
     {
-        theBoard[index]->payOut(*currPlayer); // can't call payOut like this because theBoard has Square*
         // if landed on slc, need to move again, without rolling, using the changed rollSum value
         if (index == 2 || index == 17 || index == 33)
         {
@@ -166,6 +165,7 @@ void Board::move(bool newRoll)
             cout << "You landed on Needles Hall" << endl;
             // need to call the payOut function in Needles
         }
+        theBoard[index]->payOut(*currPlayer); // can't call payOut like this because theBoard has Square*
     }
     // need to implement rolling doubles
 }

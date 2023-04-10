@@ -4,7 +4,13 @@ using namespace std;
 
 Textdisplay::Textdisplay()
 {
-    std::vector<string> v;
+    for (int i = 0; i < 40; i++) {
+        string empty = "       ";
+        positions.emplace_back(empty);
+    }
+    
+
+    vector<string> v;
     v.emplace_back("Goose  ");
     v.emplace_back("Nesting");
     v.emplace_back("       ");
@@ -16,7 +22,7 @@ Textdisplay::Textdisplay()
     v.emplace_back("       ");
     v.emplace_back("-------");
     v.emplace_back("EV1    ");
-    v.emplace_back("       ");
+    v.emplace_back(positions[21]);
     v.emplace_back("_______");
     theBoard.emplace_back(v);
     v.clear();
@@ -324,6 +330,31 @@ Textdisplay::Textdisplay()
     v.emplace_back("_______");
     theBoard.emplace_back(v);
     v.clear();
+
+    for (int i = 20; i <= 30; i++) {
+        convertLoc[i] = i - 20;
+    }
+    for (int i = 0; i <= 10; i++) {
+        convertLoc[i] = 39 - i;
+    }
+    convertLoc[11] = 27;
+    convertLoc[12] = 25;
+    convertLoc[13] = 23;
+    convertLoc[14] = 21;
+    convertLoc[15] = 19;
+    convertLoc[16] = 17;
+    convertLoc[17] = 15;
+    convertLoc[18] = 13;
+    convertLoc[19] = 11;
+    convertLoc[31] = 12;
+    convertLoc[32] = 14;
+    convertLoc[33] = 16;
+    convertLoc[34] = 18;
+    convertLoc[35] = 20;
+    convertLoc[36] = 22;
+    convertLoc[37] = 24;
+    convertLoc[38] = 26;
+    convertLoc[39] = 28;
 }
 
 std::ostream &operator<<(std::ostream &out, const Textdisplay &td)
@@ -336,7 +367,7 @@ std::ostream &operator<<(std::ostream &out, const Textdisplay &td)
             {
                 out << '_';
             }
-            out << std::endl;
+            out << endl;
         }
         else if (i > 0 && i < 6)
         {
@@ -424,6 +455,27 @@ std::ostream &operator<<(std::ostream &out, const Textdisplay &td)
     return out;
 }
 
+void Textdisplay::notify(Board &whoNotified) {
+    if (whoNotified.currPlayer == nullptr) {
+        // setting up all pieces at the beginning of the game
+        cout << "whoNotified was a nullptr" << endl;
+        for (int i = 0; i < whoNotified.numPieces; i++) {
+
+        }
+    } else {
+        // moving one player's piece after a move
+        cout << "currentPlayerNum is " << whoNotified.currPlayer->getPlayerNum() + 1 << endl;
+        cout << "current piece is " << whoNotified.currPlayer->getPiece() << endl;
+        int oldLoc = convertLoc[whoNotified.currPlayer->getOldLocId()];;
+        int newLoc = convertLoc[whoNotified.currPlayer->getLocId()];
+        int spot = whoNotified.currPlayer->getPlayerNum();
+        theBoard[oldLoc][3][spot] = ' ';
+        theBoard[newLoc][3][spot] = whoNotified.currPlayer->getPiece();
+        cout << *this;
+    }
+} 
+
 Textdisplay::~Textdisplay() {
     theBoard.clear();
+    positions.clear();
 }

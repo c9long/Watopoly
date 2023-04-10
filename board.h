@@ -5,6 +5,8 @@
 #include <vector>
 #include <map>
 
+class Textdisplay;
+
 class Board
 {
     Textdisplay* td;

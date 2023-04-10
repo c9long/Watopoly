@@ -11,7 +11,7 @@
 
 using namespace std;
 
-Player::Player(string name, int balance, char piece, bool inJail, int numJailRolls, int locId, int numCups) : name{name}, balance{balance}, piece{piece}, inJail{inJail}, numJailRolls{numJailRolls}, locId{locId}, numCups{numCups} {}
+Player::Player(string name, int balance, char piece, bool inJail, int numJailRolls, int locId, int numCups, int playerNum) : name{name}, balance{balance}, piece{piece}, inJail{inJail}, numJailRolls{numJailRolls}, locId{locId}, numCups{numCups}, playerNum{playerNum} {}
 
 string Player::getName()
 {
@@ -40,9 +40,19 @@ int Player::getLocId()
 {
     return locId;
 }
+
+int Player::getOldLocId() 
+{
+    return oldLocId;
+}
 int Player::getNumCups()
 {
     return numCups;
+}
+
+int Player::getPlayerNum() 
+{
+    return playerNum;
 }
 
 void Player::roll()

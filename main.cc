@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
                     int location = 0;
                     int timsLinePos = 0;
                     int turnsInLine = 0;
+                    int playerNum = i;
                     ifs >> name;
                     cout << "Name " << name << endl;
                     ifs >> s;
@@ -89,13 +90,13 @@ int main(int argc, char *argv[])
                             if (turnsInLine >= 0 && turnsInLine <= 2)
                             {
                                 // string name, int balance, char piece, bool inJail, int numJailRolls, int locId, int numCups
-                                p = new Player{name, balance, piece, true, turnsInLine, location, timsCups};
+                                p = new Player{name, balance, piece, true, turnsInLine, location, timsCups, playerNum};
                             }
                         }
                     }
                     else
                     {
-                        p = new Player{name, balance, piece, false, 0, 0, timsCups};
+                        p = new Player{name, balance, piece, false, 0, 0, timsCups, playerNum};
                     }
 
                     players.emplace_back(p);
@@ -176,11 +177,12 @@ int main(int argc, char *argv[])
                 cout << "Please choose a valid/available piece" << endl;
                 cin >> piece;
             }
-            Player *p = new Player{name, 1500, piece, false, 0, 0, 0};
+            Player *p = new Player{name, 1500, piece, false, 0, 0, 0, i};
             pieces[piece] = p;
             players.emplace_back(p);
         }
         Board b{players};
+        b.numPieces = numPlayers;
         cout << b;
 
         cout << "Player " << b.currPlayerNum + 1 << " turn!" << endl;
@@ -211,9 +213,8 @@ int main(int argc, char *argv[])
             else if (cmd == "roll")
             {
                 b.move();
-            }
-            else if (cmd == "next")
-            {
+            } 
+            else if (cmd == "next") {
                 b.next();
             }
             else if (cmd == "trade")

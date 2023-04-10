@@ -16,6 +16,8 @@ protected:
     bool inJail;
     int numJailRolls;
     int locId;
+    int oldLocId;
+    int playerNum;
     int numCups; // Number of tims cups player currently has
     void roll(); // returns total roll num
     void next();
@@ -25,15 +27,17 @@ protected:
     // bool trade(std::string name, std::string give, std::string receive);
 
 public:
-    Player(std::string name, int balance, char piece, bool inJail, int numJailRolls, int locId, int numCups);
+    Player(std::string name, int balance, char piece, bool inJail, int numJailRolls, int locId, int numCups, int playerNum);
     std::string getName();
     char getPiece();
     int getBalance();
     bool getInJail();
     int getNumJailRolls();
     int getLocId();
+    int getOldLocId();
     int getNumCups();
-
+    int getPlayerNum();
+    
     void setLocId(int loc);
     void toggleInJail();
 

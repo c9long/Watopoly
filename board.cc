@@ -78,6 +78,7 @@ void Board::move(bool newRoll) {
     if (newRoll) {
         currPlayer->roll();
     }
+    currPlayer->oldLocId = currPlayer->locId;
     currPlayer->locId = (currPlayer->locId + currPlayer->rollSum) % 40;
     updateTD();
     int index = currPlayer->locId;
@@ -131,7 +132,7 @@ void Board::next() {
 }
 
 void Board::updateTD() {
-    //td->notify();
+    td->notify(*this);
 }
 
 bool Board::gameOver() {

@@ -64,7 +64,7 @@ void LtBlue::purchase(Player &buyer)
     }
 }
 
-void LtBlue::auction(){
+void LtBlue::auction(int amount){
 
 }
 

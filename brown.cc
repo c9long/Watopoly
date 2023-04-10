@@ -60,7 +60,7 @@ void Brown::purchase(Player &buyer)
     }
 }
 
-void Brown::auction(){
+void Brown::auction(int amount){
 
 }
 

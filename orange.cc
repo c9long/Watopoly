@@ -63,7 +63,7 @@ void Orange::purchase(Player &buyer)
     }
 }
 
-void Orange::auction(){
+void Orange::auction(int amount){
 
 }
 

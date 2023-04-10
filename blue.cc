@@ -56,7 +56,7 @@ void Blue::purchase(Player &buyer)
     }
 }
 
-void Blue::auction(){
+void Blue::auction(int amount){
 
 }
 

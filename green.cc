@@ -64,7 +64,7 @@ void Green::purchase(Player &buyer)
     }
 }
 
-void Green::auction(){
+void Green::auction(int amount){
 
 }
 

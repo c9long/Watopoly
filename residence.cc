@@ -15,7 +15,7 @@ void Residence::purchase(Player &buyer)
         throw; // re-raise to be handled in Board
     }
 }
-void Residence::auction()
+void Residence::auction(int amount)
 {
 }
 void Residence::payTuition(Player &paying, Player &earning)

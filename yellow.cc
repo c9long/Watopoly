@@ -63,7 +63,7 @@ void Yellow::purchase(Player &buyer)
     }
 }
 
-void Yellow::auction(){
+void Yellow::auction(int amount){
 
 }
 

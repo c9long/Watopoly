@@ -63,7 +63,7 @@ void Red::purchase(Player &buyer)
     }
 }
 
-void Red::auction(){
+void Red::auction(int amount){
 
 }
 

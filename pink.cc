@@ -63,7 +63,7 @@ void Pink::purchase(Player &buyer)
     }
 }
 
-void Pink::auction(){
+void Pink::auction(int amount){
 
 }
 

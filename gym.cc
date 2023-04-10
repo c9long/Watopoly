@@ -14,7 +14,7 @@ void Gym::purchase(Player &buyer) {
         throw; // re-raise to be handled in Board
     }
 }
-void Gym::auction() {
+void Gym::auction(int amount) {
 
 }
 void Gym::payTuition(Player &paying, Player &earning) {

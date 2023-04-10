@@ -17,7 +17,7 @@ public:
     Green(int price, std::string name);
     void payTuition(Player &paying, Player &earning) override;
     void addImprovement() override;
-    void auction() override;
+    void auction(int amount) override;
     void setNumImps(int num) override;
     int getNumImps() override;
     std::string getName() override;

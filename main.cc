@@ -193,6 +193,7 @@ int main(int argc, char *argv[])
             cin >> cmd;
             while (cmd != "roll" && cmd != "next" && cmd != "trade" && cmd != "improve" && cmd != "mortgage" && cmd != "unmortgage" && cmd != "assets" && cmd != "all" && cmd != "save" && cmd != "bankrupt")
             {
+                if (cin.eof()) break;
                 cout << "Please enter a valid command" << endl;
                 cin >> cmd;
             }

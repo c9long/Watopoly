@@ -131,7 +131,7 @@ void Board::next() {
 }
 
 void Board::updateTD() {
-    td->notify();
+    //td->notify();
 }
 
 bool Board::gameOver() {

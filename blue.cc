@@ -79,3 +79,7 @@ int Blue::getPrice() {
 Blue::~Blue() {
     impTuit.clear();
 }
+
+int Blue::getTuition() {
+    return impTuit.at(numImps);
+}

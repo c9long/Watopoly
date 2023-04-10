@@ -86,3 +86,7 @@ int Pink::getPrice() {
 Pink::~Pink() {
     impTuit.clear();
 }
+
+int Pink::getTuition() {
+    return impTuit.at(numImps);
+}

@@ -37,3 +37,7 @@ int Gym::getPrice() {
 string Gym::getName() {
     return 0;
 }
+
+int Gym::getTuition() {
+    return 0;
+}

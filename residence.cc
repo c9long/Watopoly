@@ -41,3 +41,7 @@ int Residence::getPrice()
 {
     return 200;
 }
+
+int Residence::getTuition() {
+    return 0;
+}

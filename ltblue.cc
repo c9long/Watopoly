@@ -87,3 +87,7 @@ int LtBlue::getPrice() {
 LtBlue::~LtBlue() {
     impTuit.clear();
 }
+
+int LtBlue::getTuition() {
+    return impTuit.at(numImps);
+}

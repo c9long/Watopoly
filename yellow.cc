@@ -75,6 +75,10 @@ int Yellow::getNumImps() {
     return numImps;
 }
 
+int Yellow::getTuition() {
+    return impTuit.at(numImps);
+}
+
 string Yellow::getName() {
     return name;
 }

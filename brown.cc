@@ -83,3 +83,7 @@ int Brown::getPrice() {
 Brown::~Brown() {
     impTuit.clear();
 }
+
+int Brown::getTuition() {
+    return impTuit.at(numImps);
+}

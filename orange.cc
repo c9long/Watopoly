@@ -86,3 +86,7 @@ int Orange::getPrice() {
 Orange::~Orange() {
     impTuit.clear();
 }
+
+int Orange::getTuition() {
+    return impTuit.at(numImps);
+}

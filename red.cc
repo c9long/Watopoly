@@ -86,3 +86,7 @@ int Red::getPrice() {
 Red::~Red() {
     impTuit.clear();
 }
+
+int Red::getTuition() {
+    return impTuit.at(numImps);
+}

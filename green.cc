@@ -87,3 +87,7 @@ int Green::getPrice() {
 Green::~Green() {
     impTuit.clear();
 }
+
+int Green::getTuition() {
+    return impTuit.at(numImps);
+}

@@ -23,7 +23,7 @@ public:
     int getNumImps() override;
     std::string getName() override;
     int getPrice() override;
-    void getTuition() override;
+    int getTuition() override;
     
     ~Brown();
 };

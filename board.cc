@@ -382,6 +382,7 @@ void Board::auction(Square* property)
                     while (input <= bid || input > players.at(i)->balance)
                     {
                         cout << "Your bid is invalid. You must either bid higher than the existing bid, or you do not have the funds to support this bid." << endl;
+                        cin >> input;
                     }
                     bid = input;
                 }

@@ -55,14 +55,16 @@ int main(int argc, char *argv[]) {
                     ifs >> s;
                     balance = stoi(s);
                     cout << "balance is " << balance << endl;
+                    ifs >> s;
+                    location = stoi(s);
                     char c;
-                    ifs.get(c);
                     ifs.get(c);
                     // getline(ifs, location);
                     /* cout << name << endl;
                     cout << piece << endl;
                     cout << timsCups << endl;
                     cout << balance << endl; */
+
                     cout << "location " << location << endl;
                     Player *p;
                     if (location == 10) {  // Player may be in DC Tims line
@@ -92,7 +94,7 @@ int main(int argc, char *argv[]) {
                 // ifs >> s;
                 // cout << "ahhh" << s << endl;
                 char c;
-                ifs.get(c);
+               
                 string currLine;
                 while (getline(ifs, currLine)) {
                     cout << "INSIDE WHILE HERE " << endl;

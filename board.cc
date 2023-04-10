@@ -24,7 +24,8 @@
 
 using namespace std;
 
-Board::Board(vector<Player*> players, int numPlayers) : players{players}, numPieces{numPlayers} {
+Board::Board(vector<Player *> players, int numPlayers) : players{players}, numPieces{numPlayers}
+{
     theBoard.emplace_back(new OSAP{});
     theBoard.emplace_back(new Brown{40, "AL"});
     theBoard.emplace_back(new SLC{});
@@ -74,61 +75,85 @@ Board::Board(vector<Player*> players, int numPlayers) : players{players}, numPie
     currPlayer = players[currPlayerNum];
 }
 
-void Board::move(bool newRoll) {
-    if (newRoll) {
+void Board::move(bool newRoll)
+{
+    if (newRoll)
+    {
         currPlayer->roll();
     }
     currPlayer->oldLocId = currPlayer->locId;
     currPlayer->locId = (currPlayer->locId + currPlayer->rollSum) % 40;
     updateTD();
     int index = currPlayer->locId;
-    if (isProperty[index]) {
-        Square* currProperty = theBoard[index];
-        if (!owners[currProperty]) {
+    if (isProperty[index])
+    {
+        Square *currProperty = theBoard[index];
+        if (!owners[currProperty])
+        {
             // we need a function that calculates the amount owed for the property you're on
             // makes it easier to have bankrupt in board, rather than in each property
             int propertyPrice = currProperty->getPrice();
-            cout << "You landed on an unowned property. Would you like to purchase " << currProperty->getName() << " for $" << propertyPrice << "? [y/n]" << endl;
+            cout << "You landed on an unowned property. Would you like to purchase " << currProperty->getName() << " for $" << propertyPrice << "? Your balance is $" << currPlayer->balance << " [y/n]" << endl;
             // input decision -> purchase or auction
             char buying;
             cin >> buying;
 
-            if (buying == 'y') {
+            if (buying == 'y')
+            {
                 // Check if able to pay
-                if (currPlayer->balance >= propertyPrice) {
+                if (currPlayer->balance >= propertyPrice)
+                {
                     // Update player balance
-                    currProperty->purchase(*currPlayer);
-                    addOwner(currProperty, currPlayer);
-                    cout << "You purchased " << currProperty->getName() << endl;
+                    try
+                    {
+                        currProperty->purchase(*currPlayer);
+                        addOwner(currProperty, currPlayer);
+                        cout << "You purchased " << currProperty->getName() << ". Your new balance is $" << currPlayer->balance << endl;
+                    }
+                    catch (invalid_argument &)
+                    {
+                    }
                 }
-            } else {
-                /* cout << "You did not buy this property" << endl;  change to auction */
             }
-        } else if (owners[theBoard[index]] != currPlayer) {
+            else
+            {
+                auction(currProperty);
+            }
+        }
+        else if (owners[theBoard[index]] != currPlayer)
+        {
             cout << "You landed on someone else's property. You owe " << owners[theBoard[index]]->getName() << " $" << theBoard[index]->getTuition() << "!" << endl;
-            while (currPlayer->balance < theBoard[index]->getTuition()) {
+            while (currPlayer->balance < theBoard[index]->getTuition())
+            {
                 cout << "You must achieve a balance that will allow you to pay your tuition. Your current balance is $" << currPlayer->balance << endl;
                 cout << "Would you like to mortgage a property, sell improvements, or trade with another player?" << endl;
                 string cmd;
                 cin >> cmd;
-                if (cmd == "mortgage") {
-
-                } else if (cmd == "sell") {
-
-                } else if (cmd == "trade") {
-                    
+                if (cmd == "mortgage")
+                {
+                }
+                else if (cmd == "sell")
+                {
+                }
+                else if (cmd == "trade")
+                {
                 }
             }
         }
-    } else {
-        theBoard[index]->payOut(*currPlayer);  // can't call payOut like this because theBoard has Square*
+    }
+    else
+    {
+        theBoard[index]->payOut(*currPlayer); // can't call payOut like this because theBoard has Square*
         // if landed on slc, need to move again, without rolling, using the changed rollSum value
-        if (index == 2 || index == 17 || index == 33) {
+        if (index == 2 || index == 17 || index == 33)
+        {
             cout << "You landed on SLC" << endl;
             // need to call the payOut function in SLC
             // currently, it just moves the same amount of steps as the previous roll
             move(false);
-        } else if (index == 7 || index == 22 || index == 36) {
+        }
+        else if (index == 7 || index == 22 || index == 36)
+        {
             cout << "You landed on Needles Hall" << endl;
             // need to call the payOut function in Needles
         }
@@ -136,27 +161,32 @@ void Board::move(bool newRoll) {
     // need to implement rolling doubles
 }
 
-void Board::next() {
+void Board::next()
+{
     currPlayerNum = (currPlayerNum + 1) % numPieces;
     currPlayer = players[currPlayerNum];
     cout << "Player " << currPlayerNum + 1 << " turn!" << endl;
     // this->updateTD();
 }
 
-void Board::updateTD() {
+void Board::updateTD()
+{
     td->notify(*this);
 }
 
-bool Board::gameOver() {
+bool Board::gameOver()
+{
     return (players.size() == 1);
 }
 
-void Board::trade(Player& other) {
+void Board::trade(Player &other)
+{
     int itemGiven = -1;
     int itemReceived = -1;
 
     // Check if trading with self
-    if (currPlayer->name == other.name) {
+    if (currPlayer->name == other.name)
+    {
         throw invalid_argument("You cannot trade with yourself!");
     }
 
@@ -165,46 +195,60 @@ void Board::trade(Player& other) {
     cin >> receive;
 
     // Store amount if either trading items are money
-    try {
+    try
+    {
         itemGiven = stoi(give);
-    } catch (exception& e) {
+    }
+    catch (exception &e)
+    {
     }
 
-    try {
+    try
+    {
         itemReceived = stoi(receive);
-    } catch (exception& e) {
+    }
+    catch (exception &e)
+    {
     }
 
     // Check if trading money for money
-    if ((itemGiven >= 0) && (itemReceived >= 0)) {
+    if ((itemGiven >= 0) && (itemReceived >= 0))
+    {
         throw invalid_argument("You cannot trade money with money!");
     }
 
-    if (itemGiven == -1) {  // Is a property
+    if (itemGiven == -1)
+    { // Is a property
         // Check if property being given has improvements
-        if (hasImprovements(give)) {
+        if (hasImprovements(give))
+        {
             throw invalid_argument("You cannot trade a property in a monopoly that has improvements!");
         }
 
         // Check if player owns property being given
         auto it = propertyMap.find(give);
-        if (it == propertyMap.end() || owners[it->second] != currPlayer) {
+        if (it == propertyMap.end() || owners[it->second] != currPlayer)
+        {
             throw invalid_argument("You cannot trade a property you don't own!");
         }
     }
 
     // Check if property being received has improvements
-    if (itemReceived == -1) {
-        if (hasImprovements(receive)) {
+    if (itemReceived == -1)
+    {
+        if (hasImprovements(receive))
+        {
             throw invalid_argument("You cannot trade a property in a monopoly that has improvements!");
         }
     }
 
     // Check if player has enough balance
-    if (itemGiven >= 0 && currPlayer->balance < itemGiven) {
+    if (itemGiven >= 0 && currPlayer->balance < itemGiven)
+    {
         throw invalid_argument("You do not have enough money to do this trade!");
     }
-    if (itemReceived >= 0 && other.balance < itemReceived) {
+    if (itemReceived >= 0 && other.balance < itemReceived)
+    {
         throw invalid_argument("You do not have enough money to do this trade!");
     }
 
@@ -213,22 +257,29 @@ void Board::trade(Player& other) {
     char c;
 
     cin >> c;
-    if (c == 'Y' || c == 'y') {
-    } else {
+    if (c == 'Y' || c == 'y')
+    {
+    }
+    else
+    {
     }
 }
 
-bool Board::hasImprovements(string propertyName) {
-    if (propertyMap[propertyName]->getNumImps() > 0) return true;
+bool Board::hasImprovements(string propertyName)
+{
+    if (propertyMap[propertyName]->getNumImps() > 0)
+        return true;
 
     return false;
 }
 
-vector<Player*> Board::getPlayers() {
+vector<Player *> Board::getPlayers()
+{
     return players;
 }
 
-void Board::setPropertyMap() {
+void Board::setPropertyMap()
+{
     propertyMap["AL"] = theBoard.at(1);
     propertyMap["ML"] = theBoard.at(3);
     propertyMap["MKV"] = theBoard.at(5);
@@ -259,19 +310,113 @@ void Board::setPropertyMap() {
     propertyMap["DC"] = theBoard.at(39);
 }
 
-Square* Board::getPropertyFromMap(std::string propertyName) {
+Square *Board::getPropertyFromMap(std::string propertyName)
+{
     return propertyMap[propertyName];
 }
 
-std::map<Square *, Player *> Board::getOwners() {
+std::map<Square *, Player *> Board::getOwners()
+{
     return owners;
 }
 
-void Board::addOwner(Square* square, Player* player) {
-    owners.emplace(square, player);
+void Board::addOwner(Square *square, Player *player)
+{
+    owners[square] = player;
 }
 
-Board::~Board() {
+void Board::auction(Square *property)
+{
+    /* cout << "You did not buy this property" << endl;  change to auction */
+    vector<bool> inAuction;
+    int numParticipants = 0;
+    int bid = 0;
+    for (int i = 0; i < players.size(); ++i)
+    {
+        cout << players.at(i)->getName() << ", would you like to place a bid? (y/n)" << endl;
+        char c;
+        cin >> c;
+        while (c != 'y' && c != 'n')
+        {
+            cout << "Please indicate whether you would like to participate in the auction or not (y/n)" << endl;
+            cin >> c;
+        }
+        if (c == 'y')
+        {
+            inAuction.emplace_back(true);
+            ++numParticipants;
+            cout << "What is your bid? Existing bid is $" << bid << endl;
+            int input = 0;
+            cin >> input;
+            while (input <= bid || input > players.at(i)->balance)
+            {
+                cout << "Your bid is invalid. You must either bid higher than the existing bid, or you do not have the funds to support this bid." << endl;
+                cin >> input;
+            }
+            bid = input;
+        }
+        else
+        {
+            inAuction.emplace_back(false);
+        }
+    }
+    while (numParticipants > 1)
+    {
+        for (int i = 0; i < inAuction.size(); ++i)
+        {
+            if (inAuction.at(i) && players.at(i)->balance <= bid)
+            {
+                cout << "You no longer have the means to continue bidding. You have been withdrawn from the auction." << endl;
+                --numParticipants;
+                inAuction.at(i) = !inAuction.at(i);
+            }
+            else if (inAuction.at(i))
+            {
+                cout << players.at(i)->getName() << ", would you like to place a bid? (y/n)" << endl;
+                char c;
+                cin >> c;
+                while (c != 'y' && c != 'n')
+                {
+                    cout << "Please indicate whether you would like to continue in the auction or not (y/n)" << endl;
+                    cin >> c;
+                }
+                if (c == 'y')
+                {
+                    cout << "What is your bid? Existing bid is $" << bid << endl;
+                    int input = 0;
+                    cin >> input;
+                    while (input <= bid || input > players.at(i)->balance)
+                    {
+                        cout << "Your bid is invalid. You must either bid higher than the existing bid, or you do not have the funds to support this bid." << endl;
+                        cin >> input;
+                    }
+                    bid = input;
+                }
+                else
+                {
+                    cout << "You have withdrawn from this auction." << endl;
+                    --numParticipants;
+                    inAuction.at(i) = !inAuction.at(i);
+                    if (numParticipants == 1)
+                        break;
+                }
+            }
+        }
+    }
+
+    for (int i = 0; i < inAuction.size(); ++i)
+    {
+        if (inAuction.at(i))
+        {
+            players.at(i)->changeBalance(-bid);
+            cout << "Congratulations on winning the auction, " << players.at(i)->getName() << "! You have purchased " << property->getName() << " for $" << bid << endl;
+            owners[property] = players.at(i);
+        }
+    }
+}
+
+Board::~Board()
+{
     currPlayer = nullptr;
     theBoard.clear();
     owners.clear();
@@ -280,7 +425,8 @@ Board::~Board() {
     delete td;
 }
 
-ostream& operator<<(std::ostream& out, const Board& b) {
+ostream &operator<<(std::ostream &out, const Board &b)
+{
     out << *(b.td);
     return out;
 }

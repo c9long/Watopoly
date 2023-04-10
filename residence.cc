@@ -9,7 +9,6 @@ void Residence::purchase(Player &buyer)
     try
     {
         buyer.changeBalance(-price);
-        owner = &buyer; // remove this when below error handled by board; remove owner field from property overall
     }
     catch (invalid_argument& ia)
     {
@@ -23,7 +22,7 @@ void Residence::auction(int amount)
 void Residence::payTuition(Player &paying, Player &earning)
 {
 }
-void Residence::addImprovement()
+void Residence::addImprovement(Player* owner)
 {
 }
 

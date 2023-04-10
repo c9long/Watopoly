@@ -16,7 +16,7 @@ class Blue : public Property
 public:
     Blue(int price, std::string name);
     void payTuition(Player &paying, Player &earning) override;
-    void addImprovement() override;
+    void addImprovement(Player* owner) override;
     void auction(int amount) override;
     void purchase(Player& buyer) override;
     void setNumImps(int num) override;

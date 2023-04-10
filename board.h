@@ -36,7 +36,8 @@ public:
     Square* getPropertyFromMap(std::string propertyName);
     std::map<Square *, Player *> getOwners();
     void updateTD();
-    void addOwner(Square * square, Player* player);
+    void addOwner(Square * square, Player* player);\
+    void auction(Square* property);
 
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };

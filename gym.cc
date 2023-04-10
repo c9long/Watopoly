@@ -8,7 +8,6 @@ void Gym::purchase(Player &buyer) {
     try
     {
         buyer.changeBalance(-price);
-        owner = &buyer; // remove this when below error handled by board; remove owner field from property overall
     }
     catch (invalid_argument& ia)
     {
@@ -22,7 +21,7 @@ void Gym::auction(int amount) {
 void Gym::payTuition(Player &paying, Player &earning) {
 
 }
-void Gym::addImprovement() {
+void Gym::addImprovement(Player* owner) {
 
 }
 

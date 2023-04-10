@@ -93,7 +93,7 @@ void Board::move(bool newRoll)
             // we need a function that calculates the amount owed for the property you're on
             // makes it easier to have bankrupt in board, rather than in each property
             int propertyPrice = currProperty->getPrice();
-            cout << "You landed on an unowned property. Would you like to purchase " << currProperty->getName() << " for $" << propertyPrice << "? [y/n]" << endl;
+            cout << "You landed on an unowned property. Would you like to purchase " << currProperty->getName() << " for $" << propertyPrice << "? Your balance is $" << currPlayer->balance << " [y/n]" << endl;
             // input decision -> purchase or auction
             char buying;
             cin >> buying;
@@ -106,7 +106,7 @@ void Board::move(bool newRoll)
                     // Update player balance
                     currProperty->purchase(*currPlayer);
                     addOwner(currProperty, currPlayer);
-                    cout << "You purchased " << currProperty->getName() << endl;
+                    cout << "You purchased " << currProperty->getName() << ". Your new balance is $" << currPlayer->balance << endl;
                 }
             }
             else
@@ -316,7 +316,7 @@ std::map<Square *, Player *> Board::getOwners()
 
 void Board::addOwner(Square *square, Player *player)
 {
-    owners.emplace(square, player);
+    owners[square] = player;
 }
 
 void Board::auction(Square* property)
@@ -391,6 +391,7 @@ void Board::auction(Square* property)
                     cout << "You have withdrawn from this auction." << endl;
                     --numParticipants;
                     inAuction.at(i) = !inAuction.at(i);
+                    if (numParticipants == 1) break;
                 }
             }
         }
@@ -402,6 +403,7 @@ void Board::auction(Square* property)
         {
             players.at(i)->changeBalance(-bid);
             cout << "Congratulations on winning the auction, " << players.at(i)->getName() << "! You have purchased " << property->getName() << " for $" << bid << endl;
+            owners[property] = players.at(i);
         }
     }
 }

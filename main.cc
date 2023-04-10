@@ -4,12 +4,13 @@
 #include <string>
 
 #include "board.h"
-#include "square.h"  // can be changed to forward declaration
+#include "square.h" // can be changed to forward declaration
 #include "textdisplay.h"
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     int numPlayers = 0;
     vector<Player *> players;
     map<char, Player *> pieces;
@@ -23,14 +24,18 @@ int main(int argc, char *argv[]) {
     pieces['L'] = nullptr;
     pieces['T'] = nullptr;
 
-    if (argc > 1) {
+    if (argc > 1)
+    {
         string arg = argv[1];
-        if (arg == "-load") {
+        if (arg == "-load")
+        {
             ifstream ifs{argv[2]};
             string s;
-            if (ifs >> s) {
+            if (ifs >> s)
+            {
                 numPlayers = stoi(s);
-                for (int i = 0; i < numPlayers; ++i) {
+                for (int i = 0; i < numPlayers; ++i)
+                {
                     string name = "";
                     char piece = '\0';
                     int timsCups = 0;
@@ -42,13 +47,16 @@ int main(int argc, char *argv[]) {
                     cout << "Name " << name << endl;
                     ifs >> s;
                     piece = s[0];
-                    cout << "Piece " << piece << endl;  // good
+                    cout << "Piece " << piece << endl; // good
                     ifs >> s;
                     // cout << "s is nwo " << s << endl;
                     // timsCups = stoi(s);
-                    try {
+                    try
+                    {
                         timsCups = stoi(s);
-                    } catch (const std::invalid_argument &e) {
+                    }
+                    catch (const std::invalid_argument &e)
+                    {
                         // handle the error
                         cout << "can't convert " << s << " using stoi !!" << endl;
                     }
@@ -67,21 +75,26 @@ int main(int argc, char *argv[]) {
 
                     cout << "location " << location << endl;
                     Player *p;
-                    if (location == 10) {  // Player may be in DC Tims line
+                    if (location == 10)
+                    { // Player may be in DC Tims line
                         cout << "player position at 10 " << endl;
                         ifs >> timsLinePos;
                         // stringstream ss(location);
                         // ss >> timsLinePos;
-                        if (timsLinePos > 0) {  // Player is in Tims line, otherwise at DC Tims Line but they are not in the DC Tims Line
+                        if (timsLinePos > 0)
+                        { // Player is in Tims line, otherwise at DC Tims Line but they are not in the DC Tims Line
                             // ss >> turnsInLine;
                             ifs >> turnsInLine;
 
-                            if (turnsInLine >= 0 && turnsInLine <= 2) {
+                            if (turnsInLine >= 0 && turnsInLine <= 2)
+                            {
                                 // string name, int balance, char piece, bool inJail, int numJailRolls, int locId, int numCups
                                 p = new Player{name, balance, piece, true, turnsInLine, location, timsCups};
                             }
                         }
-                    } else {
+                    }
+                    else
+                    {
                         p = new Player{name, balance, piece, false, 0, 0, timsCups};
                     }
 
@@ -94,9 +107,10 @@ int main(int argc, char *argv[]) {
                 // ifs >> s;
                 // cout << "ahhh" << s << endl;
                 char c;
-               
+
                 string currLine;
-                while (getline(ifs, currLine)) {
+                while (getline(ifs, currLine))
+                {
                     cout << "INSIDE WHILE HERE " << endl;
                     stringstream ss(currLine);
                     string property = "";
@@ -120,9 +134,12 @@ int main(int argc, char *argv[]) {
                     Player *owner = nullptr;
 
                     // Find player from player vector and set owner to Player
-                    if (ownerName != "BANK") {
-                        for (auto p : b.getPlayers()) {
-                            if (ownerName == p->getName()) {
+                    if (ownerName != "BANK")
+                    {
+                        for (auto p : b.getPlayers())
+                        {
+                            if (ownerName == p->getName())
+                            {
                                 owner = p;
                                 break;
                             }
@@ -133,14 +150,20 @@ int main(int argc, char *argv[]) {
                     square->setNumImps(numImps);
                 }
             }
-        } else if (arg == "testing") {
         }
-    } else {
-        while (numPlayers < 2 || numPlayers > 6) {
+        else if (arg == "testing")
+        {
+        }
+    }
+    else
+    {
+        while (numPlayers < 2 || numPlayers > 6)
+        {
             cout << "How many players would you like to enter into your new game?" << endl;
             cin >> numPlayers;
         }
-        for (int i = 0; i < numPlayers; ++i) {
+        for (int i = 0; i < numPlayers; ++i)
+        {
             cout << "Enter Player " << i + 1 << "'s name" << endl;
             string name;
             cin >> name;
@@ -148,7 +171,8 @@ int main(int argc, char *argv[]) {
             cout << "Select your piece (G, B, D, P, S, $, L, or T)" << endl;
             char piece;
             cin >> piece;
-            while ((piece != 'G' && piece != 'B' && piece != 'D' && piece != 'P' && piece != 'S' && piece != '$' && piece != 'L' && piece != 'T') || pieces[piece]) {
+            while ((piece != 'G' && piece != 'B' && piece != 'D' && piece != 'P' && piece != 'S' && piece != '$' && piece != 'L' && piece != 'T') || pieces[piece])
+            {
                 cout << "Please choose a valid/available piece" << endl;
                 cin >> piece;
             }
@@ -161,38 +185,78 @@ int main(int argc, char *argv[]) {
 
         cout << "Player " << b.currPlayerNum + 1 << " turn!" << endl;
         // while game hasn't ended
-        while (!b.gameOver()) {
+        while (!b.gameOver())
+        {
             string cmd;
             cin >> cmd;
-            while (cmd != "roll" && cmd != "next" && cmd != "trade" && cmd != "improve" && cmd != "mortgage" && cmd != "unmortgage" && cmd != "assets" && cmd != "all" && cmd != "save" && cmd != "bankrupt") {
+            while (cmd != "roll" && cmd != "next" && cmd != "trade" && cmd != "improve" && cmd != "mortgage" && cmd != "unmortgage" && cmd != "assets" && cmd != "all" && cmd != "save" && cmd != "bankrupt")
+            {
                 cout << "Please enter a valid command" << endl;
                 cin >> cmd;
             }
-            if (cmd == "bankrupt") {  // and b.currPlayer->isBankrupt()
+            if (cmd == "bankrupt")
+            { // and b.currPlayer->isBankrupt()
                 cout << "Are you sure you want to declare bankruptcy? (y/n)" << endl;
                 cin >> cmd;
-                if (cmd == "y") {
+                if (cmd == "y")
+                {
                     // b.currPlayer->bankrupt() -> begin bankruptcy auctioning process
-                } else {
+                }
+                else
+                {
                     cin >> cmd;
                     continue;
                 }
-            } else if (cmd == "roll") {
+            }
+            else if (cmd == "roll")
+            {
                 b.move();
-            } else if (cmd == "next") {
+            }
+            else if (cmd == "next")
+            {
                 b.next();
-            } else if (cmd == "trade") {
-            } else if (cmd == "improve") {
-            } else if (cmd == "mortgage") {
-            } else if (cmd == "unmortgage") {
-            } else if (cmd == "assets") {
-            } else if (cmd == "all") {
-            } else if (cmd == "save") {
+            }
+            else if (cmd == "trade")
+            {
+                string name;
+                cin >> name;
+                for (auto it = players.begin(); it != players.end(); ++it)
+                {
+                    if ((*it)->getName() == name)
+                    {
+                        try
+                        {
+                            b.trade(**it);
+                        }
+                        catch (invalid_argument &ia)
+                        {
+                            cout << ia.what() << endl;
+                        }
+                    }
+                }
+            }
+            else if (cmd == "improve")
+            {
+            }
+            else if (cmd == "mortgage")
+            {
+            }
+            else if (cmd == "unmortgage")
+            {
+            }
+            else if (cmd == "assets")
+            {
+            }
+            else if (cmd == "all")
+            {
+            }
+            else if (cmd == "save")
+            {
                 string fileName;
                 cin >> fileName;
                 ofstream outfile{fileName + ".txt"};
 
-                outfile << b.getPlayers().size() << endl;  // Save num players
+                outfile << b.getPlayers().size() << endl; // Save num players
 
                 // player char TimsCups money position -- normal
                 // player char TimsCups money 10 0 -- at DC not in jail
@@ -202,11 +266,12 @@ int main(int argc, char *argv[]) {
                 int playerTimsCups;
                 int playerMoney;
                 int playerPosition;
-                int inJail;  // Stored as bool in player, but needs to be int when written in file
+                int inJail; // Stored as bool in player, but needs to be int when written in file
                 int turnsInLine;
 
-                for (auto it = b.getPlayers().begin(); it != b.getPlayers().end(); ++it) {  // loop through players vec
-                    cout << (*it)->getName() << endl;                                       // remove later
+                for (auto it = b.getPlayers().begin(); it != b.getPlayers().end(); ++it)
+                {                                     // loop through players vec
+                    cout << (*it)->getName() << endl; // remove later
                     playerName = (*it)->getName();
                     playerPiece = (*it)->getPiece();
                     playerTimsCups = (*it)->getNumCups();
@@ -217,10 +282,14 @@ int main(int argc, char *argv[]) {
 
                     outfile << playerName << " " << playerPiece << " " << playerTimsCups << " " << playerMoney << " " << playerPosition;
 
-                    if (playerPosition == 10) {
-                        if (inJail) {
+                    if (playerPosition == 10)
+                    {
+                        if (inJail)
+                        {
                             outfile << " " << inJail << " " << turnsInLine;
-                        } else {
+                        }
+                        else
+                        {
                             outfile << " " << inJail;
                         }
                     }
@@ -229,43 +298,27 @@ int main(int argc, char *argv[]) {
 
                 string propertyNames[] = {"AL", "ML", "MKV", "ECH", "PAS", "HH", "RCH", "PAC", "DWE", "CPH",
                                           "UWP", "LHI", "BMH", "OPT", "EV1", "EV2", "EV3", "V1", "PHYS", "B1",
-                                          "CIF", "B2", "EIT", "ESC", "C2", "REV", "MC", "DC"};  // arr of all properties (including residences)
+                                          "CIF", "B2", "EIT", "ESC", "C2", "REV", "MC", "DC"}; // arr of all properties (including residences)
                 Square *square;
                 map<Square *, Player *> ownersMap = b.getOwners();
                 Player *player;
                 int improvements;
-                for (int i = 0; i < sizeof(propertyNames) / sizeof(propertyNames[0]); i++) {
+                for (int i = 0; i < sizeof(propertyNames) / sizeof(propertyNames[0]); i++)
+                {
                     square = b.getPropertyFromMap(propertyNames[i]);
                     player = nullptr;
                     improvements = 0;
 
-                    if (ownersMap.count(square) > 0) {  // Property  has owner
+                    if (ownersMap.count(square) > 0)
+                    { // Property  has owner
                         improvements = square->getNumImps();
-                        outfile << square->getName() << " " << player->getName() << " " << improvements << endl;  // format: AL owner improvements -- buildings
-                    } else {                                                                                      // BANK owns property
+                        outfile << square->getName() << " " << player->getName() << " " << improvements << endl; // format: AL owner improvements -- buildings
+                    }
+                    else
+                    { // BANK owns property
                         outfile << square->getName() << " BANK " << improvements << endl;
                     }
                 }
-
-            } else if (cmd == "bankrupt") {
-            } else if (cmd == "trade") {
-                string name;
-                cin >> name;
-                for (auto it = players.begin(); it != players.end(); ++it) {
-                    if ((*it)->getName() == name) {
-                        try {
-                            b.trade(**it);
-                        } catch (invalid_argument &ia) {
-                            cout << ia.what() << endl;
-                        }
-                    }
-                }
-            } else if (cmd == "improve") {
-            } else if (cmd == "mortgage") {
-            } else if (cmd == "unmortgage") {
-            } else if (cmd == "assets") {
-            } else if (cmd == "all") {
-            } else if (cmd == "save") {
             }
         }
     }

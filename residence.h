@@ -10,6 +10,7 @@ class Residence : public Property
     int numImps = 0;
 
 public:
+    Residence(int price, std::string name);
     void purchase(Player &buyer) override;
     void auction(int amount) override;
     void payTuition(Player &paying, Player &earning) override;

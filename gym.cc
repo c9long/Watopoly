@@ -1,6 +1,8 @@
 #include "gym.h"
 using namespace std;
 
+Gym::Gym(int price, string name): price{price}, name{name} {}
+
 void Gym::purchase(Player &buyer) {
     
     try
@@ -27,7 +29,7 @@ void Gym::addImprovement() {
 void Gym::setNumImps(int num) {} // Intentionally left blank
 
 int Gym::getNumImps() {
-    return 0;
+    return numImps;
 }
 
 int Gym::getPrice() {
@@ -35,7 +37,7 @@ int Gym::getPrice() {
 }
 
 string Gym::getName() {
-    return 0;
+    return name;
 }
 
 int Gym::getTuition() {

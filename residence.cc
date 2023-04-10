@@ -2,6 +2,8 @@
 
 using namespace std;
 
+Residence::Residence(int price, string name): price{price}, name{name} {}
+
 void Residence::purchase(Player &buyer)
 {
     try
@@ -29,12 +31,12 @@ void Residence::setNumImps(int num) {} // Intentionally left blank
 
 string Residence::getName()
 {
-    return 0;
+    return name;
 }
 
 int Residence::getNumImps()
 {
-    return 0;
+    return numImps;
 }
 
 int Residence::getPrice()

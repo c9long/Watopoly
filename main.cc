@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
                     players.emplace_back(p);
                     cout << "PLAYER PLACED BACK" << endl;
                 }
-                Board b{players};
+                Board b{players, numPlayers};
 
                 // Set each property and its owner and improvements
                 // ifs >> s;
@@ -181,9 +181,9 @@ int main(int argc, char *argv[])
             pieces[piece] = p;
             players.emplace_back(p);
         }
-        Board b{players};
-        b.numPieces = numPlayers;
-        cout << b;
+        Board b{players, numPlayers};
+        // b.numPieces = numPlayers;
+        //cout << b;
 
         cout << "Player " << b.currPlayerNum + 1 << " turn!" << endl;
         // while game hasn't ended

@@ -7,7 +7,7 @@ class NonProperty : public Square
 
 public:
     void purchase(Player &buyer) override;
-    void auction() override;
+    void auction(int amount) override;
     void payTuition(Player &paying, Player &earning) override;
     void addImprovement() override;
     virtual void payOut(Player &affected) = 0;

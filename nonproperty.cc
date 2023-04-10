@@ -2,7 +2,7 @@
 using namespace std;
 
 void NonProperty::purchase(Player &buyer) {}
-void NonProperty::auction() {}
+void NonProperty::auction(int amount) {}
 void NonProperty::payTuition(Player &paying, Player &earning) {}
 void NonProperty::addImprovement() {}
 int NonProperty::getNumImps() { return 0; }

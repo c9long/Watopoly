@@ -105,8 +105,20 @@ void Board::move(bool newRoll) {
                 /* cout << "You did not buy this property" << endl;  change to auction */
             }
         } else if (owners[theBoard[index]] != currPlayer) {
-            cout << "You landed on someone else's property. You owe " << owners[theBoard[index]]->getName() << " $___!" << endl;
-            // check if bankrupt, otherwise pay.
+            cout << "You landed on someone else's property. You owe " << owners[theBoard[index]]->getName() << " $" << theBoard[index]->getTuition() << "!" << endl;
+            while (currPlayer->balance < theBoard[index]->getTuition()) {
+                cout << "You must achieve a balance that will allow you to pay your tuition. Your current balance is $" << currPlayer->balance << endl;
+                cout << "Would you like to mortgage a property, sell improvements, or trade with another player?" << endl;
+                string cmd;
+                cin >> cmd;
+                if (cmd == "mortgage") {
+
+                } else if (cmd == "sell") {
+
+                } else if (cmd == "trade") {
+                    
+                }
+            }
         }
     } else {
         theBoard[index]->payOut(*currPlayer);  // can't call payOut like this because theBoard has Square*

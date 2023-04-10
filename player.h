@@ -4,13 +4,14 @@
 #include <string>
 #include <map>
 
-
 class Square;
-class Player {
-protected:
+class Player
+{
     std::string name;
     int balance;
     char piece;
+
+protected:
     int rollSum; // the sum of two dice rolls
     bool inJail;
     int numJailRolls;
@@ -19,8 +20,8 @@ protected:
     void roll(); // returns total roll num
     void next();
     bool hasImprovements(std::string propertyName);
-    bool owns(Square* square, Player& player); // Checks if the player owns given square
-    
+    bool owns(Square *square, Player &player); // Checks if the player owns given square
+
     // bool trade(std::string name, std::string give, std::string receive);
 
 public:
@@ -32,12 +33,12 @@ public:
     int getNumJailRolls();
     int getLocId();
     int getNumCups();
-    
+
     void setLocId(int loc);
     void toggleInJail();
 
-    void changeBalance(int x);  // cannot make properties friends for error checking
-    bool trade(Player& other, std::string give, std::string receive);
+    void changeBalance(int x); // cannot make properties friends for error checking
+    bool trade(Player &other, std::string give, std::string receive);
     friend class Board;
     friend class SLC;
 };

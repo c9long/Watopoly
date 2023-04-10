@@ -96,12 +96,12 @@ void Board::move(bool newRoll) {
                 // Check if able to pay
                 if (currPlayer->balance >= propertyPrice) {
                     // Update player balance
-                    currPlayer->balance -= propertyPrice;
+                    currProperty->purchase(*currPlayer);
                     addOwner(currProperty, currPlayer);
                     cout << "You purchased " << currProperty->getName() << endl;
                 }
             } else {
-                cout << "You did not buy this property" << endl;
+                /* cout << "You did not buy this property" << endl;  change to auction */
             }
         } else if (owners[theBoard[index]] != currPlayer) {
             cout << "You landed on someone else's property. You owe " << owners[theBoard[index]]->getName() << " $___!" << endl;

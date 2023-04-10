@@ -23,6 +23,7 @@ public:
     std::string getName() override;
     int getPrice() override;
     void purchase(Player &buyer) override;
+    void getTuition() override;
     ~Red();
 };
 

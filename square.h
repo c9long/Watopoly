@@ -16,5 +16,6 @@ public:
     virtual std::string getName() = 0;
     virtual int getPrice() = 0;
     virtual ~Square() {}
+    virtual void getTuition() = 0;
 };
 #endif

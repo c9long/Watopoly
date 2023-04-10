@@ -15,6 +15,7 @@ public:
     int getNumImps() override;
     std::string getName() override;
     int getPrice() override;
+    void getTuition() override;
     virtual ~NonProperty();
 };
 #endif

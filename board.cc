@@ -84,6 +84,15 @@ void Board::improve(string name) {
     }
 }
 
+void Board::bankrupt() {
+    for (auto it : owners) {
+        if (it.second == currPlayer) {
+            auction(it.first);
+        }
+    }
+    players.erase(players.begin() + currPlayerNum);
+}
+
 void Board::move(bool newRoll)
 {
     if (newRoll)

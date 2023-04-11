@@ -205,7 +205,7 @@ int main(int argc, char *argv[])
             cin >> cmd;
             if (cmd == "y")
             {
-                // b.currPlayer->bankrupt() -> begin bankruptcy auctioning process
+                // b.bankrupt() -> begin bankruptcy auctioning process
             }
             else
             {

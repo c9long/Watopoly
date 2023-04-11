@@ -36,34 +36,31 @@ void SLC::payOut(Player &affected) {
     
     int randomVal = v[1];
     if (randomVal <= 8) {
-        affected.rollSum = -3;
-        cout << "Moving 3 steps backwards." << endl;
+        affected.rollSum = 37;
+        cout << "Moving 3 steps backwards" << endl;
     } else if (randomVal <= 14) {
-        affected.rollSum = -2;
-        cout << "Moving 2 steps backwards." << endl;
+        affected.rollSum = 38;
+        cout << "Moving 2 steps backwards" << endl;
     } else if (randomVal <= 20) {
-        affected.rollSum = -1;        
-        cout << "Moving 1 step backwards." << endl;
+        affected.rollSum = 39;        
+        cout << "Moving 1 step backwards" << endl;
     } else if (randomVal <= 28) {
         affected.rollSum = 1;
-        cout << "Moving 1 step forward." << endl;
+        cout << "Moving 1 step forward" << endl;
     } else if (randomVal <= 34) {
         affected.rollSum = 2;
-        cout << "Moving 2 steps forward." << endl;
+        cout << "Moving 2 steps forward" << endl;
     } else if (randomVal <= 40) {
         affected.rollSum = 3;
-        cout << "Moving 3 steps forward." << endl;
+        cout << "Moving 3 steps forward" << endl;
     } else if (randomVal <= 64) {
         // go to dc tims line
-        if ((30 - affected.locId) < 0) {
-            affected.rollSum = 70 - affected.locId;
-        } else {
-            affected.rollSum = 30 - affected.locId; 
-        }
-        cout << "Going to Tims." << endl;
+        affected.rollSum = (50 - affected.locId) % 40;
+        affected.toggleInJail();
+        cout << "Going to the DC Tims Line" << endl;
     } else if (randomVal <= 88) {
         // advance to collect osap
         affected.rollSum = 40 - affected.locId;
-        cout << "Advancing to Collect OSAP." << endl;
+        cout << "Advancing to Collect OSAP" << endl;
     }
 }

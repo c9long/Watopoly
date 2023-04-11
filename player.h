@@ -15,9 +15,11 @@ protected:
     int rollSum; // the sum of two dice rolls
     bool inJail;
     int numJailRolls;
+    int numDoubleRolls = 0;
     int locId;
     int oldLocId;
     int playerNum;
+    bool canRollAgain = true;
     int numCups; // Number of tims cups player currently has
     void roll(); // returns total roll num
     void next();
@@ -33,10 +35,12 @@ public:
     int getBalance();
     bool getInJail();
     int getNumJailRolls();
+    int getNumDoubleRolls();
     int getLocId();
     int getOldLocId();
     int getNumCups();
     int getPlayerNum();
+    bool getCanRollAgain();
     
     void setLocId(int loc);
     void toggleInJail();
@@ -45,6 +49,7 @@ public:
     bool trade(Player &other, std::string give, std::string receive);
     friend class Board;
     friend class SLC;
+    friend class GoToTims;
 };
 
 #endif

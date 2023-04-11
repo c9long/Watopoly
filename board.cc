@@ -95,14 +95,28 @@ void Board::bankrupt() {
 
 void Board::move(bool newRoll)
 {
+    if (!currPlayer->getCanRollAgain()) {
+        cout << "You cannot roll again" << endl;
+        return;
+    } 
     if (newRoll)
     {
         currPlayer->roll();
     }
+    if (currPlayer->getInJail() && currPlayer->getNumJailRolls() > 0) {
+        next();
+        return;
+    }
     currPlayer->oldLocId = currPlayer->locId;
-    currPlayer->locId = (currPlayer->locId + currPlayer->rollSum) % 40;
-    updateTD();
+    if (currPlayer->getNumDoubleRolls() == 3) {
+        cout << "You rolled 3 doubles in a row, so you're going to the DC Tims Line" << endl;
+        currPlayer->locId = 10;
+        currPlayer->toggleInJail();
+    } else {
+        currPlayer->locId = (currPlayer->locId + currPlayer->rollSum) % 40;
+    }
     int index = currPlayer->locId;
+    updateTD();
     if (isProperty[index])
     {
         Square *currProperty = theBoard[index];
@@ -165,22 +179,48 @@ void Board::move(bool newRoll)
         if (index == 2 || index == 17 || index == 33)
         {
             cout << "You landed on SLC" << endl;
-            // need to call the payOut function in SLC
-            // currently, it just moves the same amount of steps as the previous roll
+            theBoard[index]->payOut(*currPlayer);
             move(false);
         }
         else if (index == 7 || index == 22 || index == 36)
         {
             cout << "You landed on Needles Hall" << endl;
-            // need to call the payOut function in Needles
+            theBoard[index]->payOut(*currPlayer);
+        } 
+        else if (index == 30) {
+            cout << "You landed on Go To Tims" << endl;
+            theBoard[index]->payOut(*currPlayer);
+            move(false);
         }
-        theBoard[index]->payOut(*currPlayer); // can't call payOut like this because theBoard has Square*
+        else if (index == 10) {
+            if (currPlayer->getInJail()) {
+                cout << "You're in the DC Tims Line" << endl;
+                currPlayer->numDoubleRolls = 0;
+                currPlayer->numJailRolls = 0;
+                next();
+                return;
+            }
+            else {
+                cout << "You're visiting the DC Tims Line" << endl;
+            }
+        } 
+        else {
+            theBoard[index]->payOut(*currPlayer);
+        }
     }
     // need to implement rolling doubles
+    if (currPlayer->getNumDoubleRolls() > 0 && !currPlayer->getInJail()) {
+        currPlayer->canRollAgain = true;
+        cout << "You rolled doubles, so you're able to roll again" << endl;
+    } else {
+        currPlayer->canRollAgain = false;
+    }
 }
 
 void Board::next()
 {
+    currPlayer->canRollAgain = true;
+    currPlayer->numDoubleRolls = 0;
     currPlayerNum = (currPlayerNum + 1) % numPieces;
     currPlayer = players[currPlayerNum];
     cout << "Player " << currPlayerNum + 1 << " turn!" << endl;

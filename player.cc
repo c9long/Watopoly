@@ -32,10 +32,17 @@ bool Player::getInJail()
 {
     return inJail;
 }
+
 int Player::getNumJailRolls()
 {
     return numJailRolls;
 }
+
+int Player::getNumDoubleRolls()
+{
+    return numDoubleRolls;
+}
+
 int Player::getLocId()
 {
     return locId;
@@ -45,6 +52,7 @@ int Player::getOldLocId()
 {
     return oldLocId;
 }
+
 int Player::getNumCups()
 {
     return numCups;
@@ -53,6 +61,11 @@ int Player::getNumCups()
 int Player::getPlayerNum() 
 {
     return playerNum;
+}
+
+bool Player::getCanRollAgain()
+{
+    return canRollAgain;
 }
 
 void Player::roll()
@@ -67,9 +80,37 @@ void Player::roll()
 
     // int die1 = rand() % 6 + 1;
     // int die2 = rand() % 6 + 1;
-
+    cout << "You rolled a " << die1 << " and a " << die2 << "." << endl;
     rollSum = die1 + die2;
-    cout << "You rolled a " << die1 << " and a " << die2 << ". Moving " << die1 + die2 << " steps now." << endl;
+    if (die1 == die2) {
+        numDoubleRolls++;
+    } else {
+        numDoubleRolls = 0;
+    }
+    if (inJail) {
+        numJailRolls++;
+    }
+    if (numJailRolls == 3 && numDoubleRolls == 1) {
+        cout << "It's been 3 turns and you rolled doubles, so you will exit the DC Tims Line." << endl;
+        toggleInJail();
+        numJailRolls = 0;
+    } 
+    else if (numJailRolls == 3) {
+        cout << "It's been 3 turns, so you will exit the DC Tims Line." << endl;
+        toggleInJail();
+        numJailRolls = 0;
+    }
+    else if (inJail && numDoubleRolls == 1) {
+        cout << "You rolled doubles, so you will exit the DC Tims Line." << endl;
+        toggleInJail();
+        numJailRolls = 0;
+    }
+    if (inJail) {
+        cout << "It's been " << numJailRolls << " turns and you didn't roll double, so you will stay in the DC Tims Line." << endl;
+    } 
+    else {
+        cout << "Moving " << die1 + die2 << " steps now." << endl;
+    }
 }
 
 void Player::next() {}

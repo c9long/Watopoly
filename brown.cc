@@ -39,9 +39,9 @@ void Brown::addImprovement(Player* owner)
             owner->changeBalance(-impCost);
             ++numImps;
         }
-        catch (...)
+        catch (invalid_argument& ia)
         {
-            std::cout << "Not enough funds to make this purchase" << std::endl;
+            std::cout << ia.what() << std::endl;
         }
     }
 }

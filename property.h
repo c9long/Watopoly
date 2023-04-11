@@ -19,11 +19,14 @@ enum class Monopoly
 
 class Property : public Square
 {
+protected:
+    bool mortgaged;
+
 public:
     virtual void purchase(Player &buyer) = 0;
     virtual void auction(int amount) = 0;
     virtual void payTuition(Player &paying, Player &earning) = 0;
-    virtual void addImprovement(Player* owner) = 0;
+    virtual void addImprovement(Player *owner) = 0;
     void payOut(Player &affected) override;
     virtual int getNumImps() = 0;
     virtual std::string getName() = 0;

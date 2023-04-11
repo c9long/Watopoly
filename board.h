@@ -38,6 +38,8 @@ public:
     void updateTD();
     void addOwner(Square * square, Player* player);\
     void auction(Square* property);
+    void improve(std::string name);
+    void bankrupt();
 
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };

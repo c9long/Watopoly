@@ -75,6 +75,24 @@ Board::Board(vector<Player *> players, int numPlayers) : players{players}, numPi
     currPlayer = players[currPlayerNum];
 }
 
+void Board::improve(string name) {
+    Square* prop = propertyMap[name];
+    if (owners[prop] == currPlayer) {
+        prop->addImprovement(currPlayer);
+    } else {
+        cout << "You cannot improve a property you don't own" << endl;
+    }
+}
+
+void Board::bankrupt() {
+    for (auto it : owners) {
+        if (it.second == currPlayer) {
+            auction(it.first);
+        }
+    }
+    players.erase(players.begin() + currPlayerNum);
+}
+
 void Board::move(bool newRoll)
 {
     if (newRoll)
@@ -143,7 +161,6 @@ void Board::move(bool newRoll)
     }
     else
     {
-        theBoard[index]->payOut(*currPlayer); // can't call payOut like this because theBoard has Square*
         // if landed on slc, need to move again, without rolling, using the changed rollSum value
         if (index == 2 || index == 17 || index == 33)
         {
@@ -157,6 +174,7 @@ void Board::move(bool newRoll)
             cout << "You landed on Needles Hall" << endl;
             // need to call the payOut function in Needles
         }
+        theBoard[index]->payOut(*currPlayer); // can't call payOut like this because theBoard has Square*
     }
     // need to implement rolling doubles
 }
